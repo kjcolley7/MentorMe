@@ -1,5 +1,6 @@
-import FluentMySQL
 import Vapor
+import FluentMySQL
+import Leaf
 
 /// Called before your application initializes.
 ///
@@ -11,6 +12,10 @@ public func configure(
 ) throws {
 	// Register providers first
 	try services.register(FluentMySQLProvider())
+	try services.register(LeafProvider())
+	
+	// Prefer using Leaf as our template renderer
+	config.prefer(LeafRenderer.self, for: TemplateRenderer.self)
 	
 	// Get server port with default of 8080
 	let port: Int
@@ -54,7 +59,7 @@ public func configure(
 	
 	// Register middleware
 	var middlewares = MiddlewareConfig() // Create _empty_ middleware config
-	// middlewares.use(FileMiddleware.self) // Serves files from `Public/` directory
+	middlewares.use(FileMiddleware.self) // Serves files from `Public/` directory
 	middlewares.use(DateMiddleware.self) // Adds `Date` header to responses
 	middlewares.use(ErrorMiddleware.self) // Catches errors and converts to HTTP response
 	services.register(middlewares)

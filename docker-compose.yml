@@ -15,6 +15,7 @@ services:
       - MYSQL_DATABASE=mentor
     volumes:
       - ./Public:/vapor/Public:ro
+      - ./Resources:/vapor/Resources:ro
     depends_on:
       - db
     networks:

@@ -1,6 +1,7 @@
 import Routing
 import Vapor
 import FluentMySQL
+import Leaf
 
 /// Register your application's routes here.
 ///
@@ -23,4 +24,8 @@ public func routes(_ router: Router) throws {
 	// Create /api/v1 routes
 	let apiController = APIController()
 	try router.register(collection: apiController)
+	
+	// Create view routes
+	let pagesController = PagesController()
+	try router.register(collection: pagesController)
 }
