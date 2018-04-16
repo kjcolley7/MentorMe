@@ -62,6 +62,8 @@ public func configure(
 	// Configure migrations
 	var migrations = MigrationConfig()
 	migrations.add(model: Category.self, database: .mysql)
-	migrations.add(migration: DefaultCategories.self, database: .mysql)
+	migrations.add(migration: PopulateCategories.self, database: .mysql)
+	migrations.add(model: SampleQuestion.self, database: .mysql)
+	migrations.add(migration: PopulateSampleQuestions.self, database: .mysql)
 	services.register(migrations)
 }

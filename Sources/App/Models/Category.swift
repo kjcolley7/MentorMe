@@ -25,3 +25,9 @@ extension Category: Migration {
 extension Category: Content { }
 
 extension Category: Parameter { }
+
+extension Category {
+	func sampleQuestions() -> Children<Category, SampleQuestion> {
+		return children(\SampleQuestion.categoryID)
+	}
+}

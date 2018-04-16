@@ -1,6 +1,6 @@
 import FluentMySQL
 
-final class DefaultCategories: Migration {
+final class PopulateCategories: Migration {
 	typealias Database = MySQLDatabase
 	
 	static let categoryNames = [
