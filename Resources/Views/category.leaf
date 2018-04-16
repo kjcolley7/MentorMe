@@ -1,0 +1,15 @@
+#set("title") {#(name)}
+
+#set("content") {
+	<h1>Category: #(name) (id=#(id))</h1>
+	<ol>
+	#for(sample in sampleQuestions) {
+		<li>
+			#(sample.question) (id=#(sample.id))
+		</li>
+	}
+	</ol>
+	</div>
+}
+
+#embed("base")

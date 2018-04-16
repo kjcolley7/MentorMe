@@ -1,0 +1,12 @@
+<!DOCTYPE html public>
+<html>
+<head>
+	<title>#get(title) - MentorMe</title>
+</head>
+<body>
+	#embed("nav")
+	<div class="container">
+		#get(content)
+	</div>
+</body>
+</html>

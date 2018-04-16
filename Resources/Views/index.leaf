@@ -1,0 +1,14 @@
+#set("title") {Available Pages}
+
+#set("content") {
+	<h1>Available Pages</h1>
+	<ul>
+	#for(page in pages) {
+		<li>
+			<a href="#(page)">#(page)</a>
+		</li>
+	}
+	</ul>
+}
+
+#embed("base")

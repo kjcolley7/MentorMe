@@ -1,0 +1,14 @@
+#set("title") {Categories}
+
+#set("content") {
+	<h1>Categories</h1>
+	<ul>
+	#for(category in categories) {
+		<li>
+			<a href="/categories/#(category.id)">#(category.name) (id=#(category.id))</a>
+		</li>
+	}
+	</ul>
+}
+
+#embed("base")
