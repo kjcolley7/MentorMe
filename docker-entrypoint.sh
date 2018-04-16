@@ -16,8 +16,8 @@ fi
 # Start Vapor app
 if [ -f /vapor/.build/release/Run ]; then
 	echo "Starting Vapor app in release mode"
-	exec /vapor/.build/release/Run --env prod --hostname 0.0.0.0
+	exec /vapor/.build/release/Run --env prod
 else
 	echo "Starting Vapor app in debug mode"
-	exec /vapor/.build/debug/Run --hostname 0.0.0.0
+	exec /vapor/.build/debug/Run
 fi

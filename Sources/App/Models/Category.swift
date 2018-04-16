@@ -1,11 +1,5 @@
-//
-//  Category.swift
-//  App
-//
-//  Created by Kevin Colley on 4/13/18.
-//
-
 import FluentMySQL
+import Vapor
 
 final class Category: MySQLModel {
 	var id: Int?
@@ -17,4 +11,17 @@ final class Category: MySQLModel {
 	}
 }
 
-extension Category: Migration { }
+extension Category: Migration {
+	static func prepare(on connection: MySQLConnection) -> Future<Void> {
+		return Database.create(self, on: connection) { builder in
+			try addProperties(to: builder)
+			
+			// Mark name field as UNIQUE
+			try builder.addIndex(to: \.name, isUnique: true)
+		}
+	}
+}
+
+extension Category: Content { }
+
+extension Category: Parameter { }

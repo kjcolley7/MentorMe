@@ -20,9 +20,11 @@ public func routes(_ router: Router) throws {
 		}
 	}
 	
-	// Example of configuring a controller
-	let todoController = TodoController()
-	router.get("todos", use: todoController.index)
-	router.post("todos", use: todoController.create)
-	router.delete("todos", Todo.parameter, use: todoController.delete)
+	// Create /api/v1 routes
+	let api = router.grouped("api", "v1")
+	
+	// List categories
+	let categoryController = CategoryController()
+	api.get("categories", use: categoryController.index)
+	api.get("categories", Category.parameter, use: categoryController.get)
 }

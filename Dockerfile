@@ -18,6 +18,7 @@ COPY Sources ./Sources
 RUN swift build
 RUN rm -rf Sources Package.resolved Package.swift
 COPY docker-entrypoint.sh ./
+ENV ["SERVER_LISTEN", "SERVER_PORT", "SERVER_MAX_BODY_SIZE"]
 ENV ["MYSQL_HOSTNAME", "MYSQL_USER", "MYSQL_PASSWORD", "MYSQL_DATABASE"]
 VOLUME ["/vapor/Public"]
 ENTRYPOINT ["/vapor/docker-entrypoint.sh"]
