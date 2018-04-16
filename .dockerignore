@@ -1,0 +1,9 @@
+.build
+.data
+*.xcodeproj
+.dockerignore
+Dockerfile
+docker-compose.yml
+README.md
+.gitignore
+.DS_Store
