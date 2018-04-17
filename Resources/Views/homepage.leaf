@@ -1,0 +1,40 @@
+#set("title") {Homepage}
+#set("content") {
+	<div class="features-clean">
+    <div class="intro">
+        <h2 class="text-center">Mentor Me</h2>
+        <p class="text-center">A Platform for Learning and Teaching</p>
+    </div>
+    <div class="row features">
+        <div class="col-sm-6 col-lg-4 item"><i class="fa fa-comments icon"></i>
+            <h3 class="name">Communication</h3>
+            <p class="description">Connect with mentors through our messaging system</p>
+        </div>
+        <div class="col-sm-6 col-lg-4 item"><i class="fa fa-search icon"></i>
+            <h3 class="name">Find who you need</h3>
+            <p class="description">Search for mentors using location or specific categories</p>
+        </div>
+        <div class="col-sm-6 col-lg-4 item"><i class="fa fa-book icon"></i>
+            <h3 class="name">User Profile</h3>
+            <p class="description">Create your profile to let others learn about you</p>
+        </div>
+            <div class="col-sm-6 col-lg-4 item"><i class="fa fa-graduation-cap icon"></i>
+            	<h3 class="name">Become a Mentor</h3>
+                <p class="description">Help and answer questions from Mentees in categories you feel comfortable with</p>
+            </div>
+            <div class="col-sm-6 col-lg-4 item"><i class="fa fa-puzzle-piece icon"></i>
+                <h3 class="name">Become a Mentee</h3>
+                <p class="description">Look for Mentors that can help you with what you need</p>
+            </div>
+            <div class="col-sm-6 col-lg-4 item"><i class="fa fa-leaf icon"></i>
+                <h3 class="name">Animal Friendly</h3>
+                <p class="description">No animals were harmed in the making of this website</p>
+            </div>
+    	</div>
+	</div>
+	<div class="intro" id="search">
+        <h3 class="text-center">Try Finding a Mentor in Your City</h3>
+        <p class="text-center">Input your city below to start searching for a mentor.</p>
+    </div>
+}
+#embed("base")
