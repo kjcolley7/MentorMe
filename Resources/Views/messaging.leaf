@@ -31,6 +31,15 @@
 				<textarea name="message" class="text-input" placeholder="Enter message here" style="margin-top:40px;" maxlength="140"></textarea>
 			</form>				
 			</div>
+			<div class="row">
+    			<div class="col" style="margin-top:30px;">
+        			<ul class="sample-questions">
+        			#for(question in sampleQuestions) {
+        				<li>#(question)</li>
+        			}
+        			</ul>
+    			</div>
+			</div>
 		</div>
 	</div>
 }
