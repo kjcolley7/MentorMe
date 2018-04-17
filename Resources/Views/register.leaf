@@ -1,0 +1,38 @@
+#set("title") {Sign Up}
+
+#set("content") {
+	<div class="register-photo">
+		<div class="form-container">
+			<div class="image-holder"></div>
+			<form method="post" action="/register">
+				<h2 class="text-center"><strong>Create</strong> an account.</h2>
+				<div class="form-group">
+					<input type="email" name="email" placeholder="Email" id="email" class="form-control" />
+				</div>
+				<div class="form-group">
+					<input type="password" name="password" placeholder="Password" id="password" class="form-control" />
+				</div>
+				<div class="form-group">
+					<input type="password" name="passwordRepeat" placeholder="Confirm Password" id="confirm_password" class="form-control" />
+				</div>
+				<div class="form-group">
+					<input type="name" name="firstName" placeholder="First Name" id="firstName" class="form-control" />
+				</div>
+				<div class="form-group">
+					<input type="number" name="age" placeholder="Age" id="age" class="form-control" />
+				</div>
+				<div class="form-group">
+					<input type="city" name="city" placeholder="City" id="city" class="form-control" />
+				</div>
+				<div class="form-group">
+					<a href="login.html">
+						<button class="btn btn-primary btn-block" type="submit" id="signup">Sign Up</button>
+					</a>
+				</div>
+				<a href="login.html" class="already">Already have an account? Login here.</a>
+			</form>
+		</div>
+	</div>
+}
+
+#embed("base")

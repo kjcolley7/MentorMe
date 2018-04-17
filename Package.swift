@@ -11,10 +11,22 @@ let package = Package(
 		.package(url: "https://github.com/vapor/fluent-mysql.git", from: "3.0.0-rc"),
 		
 		// 🍃 An expressive, performant, and extensible templating language built for Swift.
-		.package(url: "https://github.com/vapor/leaf.git", from: "3.0.0-rc.2")
+		.package(url: "https://github.com/vapor/leaf.git", from: "3.0.0-rc.2"),
+		
+		// 👤 Authentication and Authorization layer for Fluent.
+		.package(url: "https://github.com/vapor/auth.git", from: "2.0.0-rc.3.0.1"),
+		
+		// ⚡️Non-blocking, event-driven Redis client.
+		.package(url: "https://github.com/vapor/redis.git", from: "3.0.0-rc.2.2")
 	],
 	targets: [
-		.target(name: "App", dependencies: ["Vapor", "FluentMySQL", "Leaf"]),
+		.target(name: "App", dependencies: [
+			"Vapor",
+			"FluentMySQL",
+			"Leaf",
+			"Authentication",
+			"Redis"
+		]),
 		.target(name: "Run", dependencies: ["App"]),
 		.testTarget(name: "AppTests", dependencies: ["App"])
 	]

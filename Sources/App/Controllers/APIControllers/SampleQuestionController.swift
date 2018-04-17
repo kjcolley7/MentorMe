@@ -5,10 +5,10 @@ final class SampleQuestionController: RouteCollection {
 	func boot(router: Router) throws {
 		let sampg = router.grouped("sampleQuestions")
 		
-		// GET /sampleQuestions
+		// GET /api/v1/sampleQuestions
 		sampg.get(use: index)
 		
-		// GET /sampleQuestions/:id
+		// GET /api/v1/sampleQuestions/:id
 		sampg.get(SampleQuestion.parameter, use: get)
 	}
 	

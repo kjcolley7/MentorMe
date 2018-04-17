@@ -5,42 +5,54 @@ final class CategoryPages: RouteCollection {
 		let catg = router.grouped("categories")
 		
 		// GET /categories
-		catg.get(use: index)
+		catg.getTemplate(template: "categories", contextGetter: indexContext)
 		
 		// GET /categories/:id
-		catg.get(Category.parameter, use: get)
+		catg.getTemplate(Category.parameter, template: "category", contextGetter: categoryContext)
 	}
 	
 	
-	struct IndexContext: Encodable {
+	final class IndexContext: TemplateContext {
+		var user: UserProfile?
 		let categories: [Category]
+		
+		init(user: UserProfile? = nil, categories: [Category]) {
+			self.user = user
+			self.categories = categories
+		}
 	}
 	
-	/// Render a list of categories using categories.leaf
-	func index(_ req: Request) -> Future<View> {
-		return Category.query(on: req).all().flatMap(to: View.self) { categories in
-			let context = IndexContext(categories: categories)
-			return try req.view().render("categories", context)
+	/// Context given to categories.leaf
+	func indexContext(_ req: Request) -> Future<IndexContext> {
+		return Category.query(on: req).all().map(to: IndexContext.self) { categories in
+			return IndexContext(categories: categories)
 		}
 	}
 	
 	
-	struct GetContext: Encodable {
+	final class CategoryContext: TemplateContext {
+		var user: UserProfile?
 		let id: Category.ID
 		let name: String
 		let sampleQuestions: [SampleQuestion]
+		
+		init(user: UserProfile? = nil, id: Category.ID, name: String, sampleQuestions: [SampleQuestion]) {
+			self.user = user
+			self.id = id
+			self.name = name
+			self.sampleQuestions = sampleQuestions
+		}
 	}
 	
-	/// Render sample questions within a specific category using category.leaf
-	func get(_ req: Request) throws -> Future<View> {
-		return try req.parameter(Category.self).flatMap(to: View.self) { category in
-			return try category.sampleQuestions().query(on: req).all().flatMap(to: View.self) { sampleQuestions in
-				let context = GetContext(
-					id: category.id!,
+	/// Context given to category.leaf
+	func categoryContext(_ req: Request) throws -> Future<CategoryContext> {
+		return try req.parameter(Category.self).flatMap(to: CategoryContext.self) { category in
+			return try category.sampleQuestions().query(on: req).all().map(to: CategoryContext.self) { sampleQuestions in
+				return try CategoryContext(
+					id: category.requireID(),
 					name: category.name,
 					sampleQuestions: sampleQuestions
 				)
-				return try req.view().render("category", context)
 			}
 		}
 	}

@@ -1,1 +1,31 @@
-<!-- TODO -->
+<nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+	<div class="container">
+		<a href="/" class="navbar-brand">MentorMe</a>
+		<button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navcol-1">
+			<ul class="nav navbar-nav mr-auto">
+				<li id="findMentorNav" role="presentation" class="nav-item">
+					<a class="nav-link" href="#if(user) {/search} else {/login}">Find a Mentor</a>
+				</li>
+				#if(user) {
+					<li id="profileNav" class="nav-item" role="presentation"><a class="nav-link" href="/profile">Profile</a></li>
+					<li id="becomeMentorNav" class="nav-item" role="presentation"><a class="nav-link" href="/becomeMentor">Become a Mentor</a></li>
+					<li id="messagingNav" class="nav-item" role="presentation"><a class="nav-link" href="/messaging">Messaging</a></li>
+				}
+			</ul>
+			<span class="navbar-text actions">
+				#if(user) {
+					<form method="post" action="/logout">
+						<button class="btn btn-light action-button" id="sign_out_button" type="submit">Sign Out</button>
+					</form>
+				} else {
+					<a class="login" id="log_in_button" href="/login">Log In</a>
+					<a class="btn btn-light action-button" id="sign_up_button" role="button" href="/register">Sign Up</a>
+				}
+			</span>
+		</div>
+	</div>
+</nav>

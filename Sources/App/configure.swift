@@ -1,6 +1,9 @@
 import Vapor
 import FluentMySQL
 import Leaf
+import Authentication
+import Redis
+import Crypto
 
 /// Called before your application initializes.
 ///
@@ -13,6 +16,14 @@ public func configure(
 	// Register providers first
 	try services.register(FluentMySQLProvider())
 	try services.register(LeafProvider())
+	try services.register(RedisProvider())
+	try services.register(AuthenticationProvider())
+	
+	// Add both types of databases
+	var databases = DatabaseConfig()
+	databases.add(database: MySQLDatabase.self, as: .mysql)
+	databases.add(database: RedisDatabase.self, as: .redis)
+	services.register(databases)
 	
 	// Prefer using Leaf as our template renderer
 	config.prefer(LeafRenderer.self, for: TemplateRenderer.self)
@@ -47,18 +58,51 @@ public func configure(
 	try routes(router)
 	services.register(router, as: Router.self)
 	
-	// Register custom MySQL Config
+	// Register custom MySQL config
 	let mysqlConfig = MySQLDatabaseConfig(
 		hostname: Environment.get("MYSQL_HOSTNAME") ?? "127.0.0.1",
-		port: 3306,
 		username: Environment.get("MYSQL_USER") ?? "mentor",
 		password: Environment.get("MYSQL_PASSWORD") ?? "changeme",
 		database: Environment.get("MYSQL_DATABASE") ?? "mentor"
 	)
 	services.register(mysqlConfig)
 	
+	// Register custom Redis config
+	let redisConfig = RedisClientConfig(
+		hostname: Environment.get("REDIS_HOSTNAME") ?? "127.0.0.1",
+		password: Environment.get("REDIS_PASSWORD")
+	)
+	services.register(redisConfig)
+	
+	
+	#if false
+	// Register RedisClient as a service
+	// FIXME: DOESN'T WORK - https://github.com/vapor/redis/issues/98
+	services.register { container -> RedisClient in
+		// Evil hack to create a RedisClient synchronously
+		let eventLoop = EmbeddedEventLoop()
+		let syncFuture = Future<Void>.done(on: eventLoop)
+		return try syncFuture.flatMap(to: RedisClient.self) {
+			return container.requestConnection(to: .redis)
+		}.wait()
+	}
+	
+	// Register Redis as our preferred KeyedCache
+	// FIXME: DOESN'T WORK - https://github.com/vapor/redis/issues/98
+	config.prefer(RedisClient.self, for: KeyedCache.self)
+	
+	// Register KeyedCacheSessions (now backed by Redis) as our prefered Sessions
+	config.prefer(KeyedCacheSessions.self, for: Sessions.self)
+	#endif
+	
+	
+	// Register BCryptDigest as our prefered PasswordVerifier
+	config.prefer(BCryptDigest.self, for: PasswordVerifier.self)
+	
 	// Register middleware
 	var middlewares = MiddlewareConfig() // Create _empty_ middleware config
+	middlewares.use(UserAccount.authSessionsMiddleware()) // Handles user authentication sessions
+	middlewares.use(SessionsMiddleware.self) // Handles session data
 	middlewares.use(FileMiddleware.self) // Serves files from `Public/` directory
 	middlewares.use(DateMiddleware.self) // Adds `Date` header to responses
 	middlewares.use(ErrorMiddleware.self) // Catches errors and converts to HTTP response
@@ -70,5 +114,9 @@ public func configure(
 	migrations.add(migration: PopulateCategories.self, database: .mysql)
 	migrations.add(model: SampleQuestion.self, database: .mysql)
 	migrations.add(migration: PopulateSampleQuestions.self, database: .mysql)
+	migrations.add(model: UserAccount.self, database: .mysql)
 	services.register(migrations)
 }
+
+/// Allow registering a RedisClient as a service
+extension RedisClient: Service { }

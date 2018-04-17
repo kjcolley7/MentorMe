@@ -1,0 +1,32 @@
+#set("title") {Login}
+
+#set("content") {
+	<div class="login-clean">
+		#if(!user.authenticated) {
+			<div class="container">
+				<div class="alert alert-danger text-center center-block" id="login_error" style="display: none">
+					<strong>Wrong User/Password.</strong> Please try again
+				</div>
+			</div>
+		}
+		<form method="post">
+			<h2 class="sr-only">Login Form</h2>
+			<div class="illustration">
+				<i class="fa fa-user"></i>
+			</div>
+			<div class="form-group">
+				<input type="email" name="email" placeholder="name@example.com" class="form-control" id="username" />
+			</div>
+			<div class="form-group">
+				<input type="password" name="password" placeholder="Password" class="form-control" id="pass" />
+			</div>
+			<div id="signed">
+				<div class="form-group">
+					<button class="btn btn-primary btn-block" type="submit">Log In</button>
+				</div>
+			</div>
+		</form>
+	</div>
+}
+
+#embed("base")

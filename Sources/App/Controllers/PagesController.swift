@@ -6,19 +6,37 @@ final class PagesController: RouteCollection {
 		let categoryPages = CategoryPages()
 		try router.register(collection: categoryPages)
 		
+		// Authentication
+		let authController = AuthController()
+		try router.register(collection: authController)
+		
 		// Add an index route for listing all available pages
-		router.get(use: index)
+		router.getTemplate("pages", template: "index", contextGetter: pages)
+		
+		// Add homepage view
+		router.get(use: homepage)
 	}
 	
-	struct IndexContext: Encodable {
+	func homepage(_ req: Request) throws -> Future<View> {
+		return try req.view().render("homepage")
+	}
+	
+	final class IndexContext: TemplateContext {
+		var user: UserProfile?
 		let pages: [String]
+		
+		init(user: UserProfile? = nil, pages: [String]) {
+			self.user = user
+			self.pages = pages
+		}
 	}
 	
 	/// Render a list of available pages using index.leaf
-	func index(_ req: Request) throws -> Future<View> {
-		let context = IndexContext(pages: [
-			"/categories"
-		])
-		return try req.view().render("index", context)
+	func pages(_ req: Request) throws -> Future<IndexContext> {
+		return Future<IndexContext>.map(on: req) {
+			return IndexContext(pages: [
+				"/categories"
+			])
+		}
 	}
 }

@@ -20,5 +20,6 @@ RUN rm -rf Sources Package.resolved Package.swift
 COPY docker-entrypoint.sh ./
 ENV ["SERVER_LISTEN", "SERVER_PORT", "SERVER_MAX_BODY_SIZE"]
 ENV ["MYSQL_HOSTNAME", "MYSQL_USER", "MYSQL_PASSWORD", "MYSQL_DATABASE"]
+ENV ["REDIS_HOSTNAME", "REDIS_PASSWORD"]
 VOLUME ["/vapor/Public", "/vapor/Resources"]
 ENTRYPOINT ["/vapor/docker-entrypoint.sh"]

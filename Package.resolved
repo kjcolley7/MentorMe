@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "Auth",
+        "repositoryURL": "https://github.com/vapor/auth.git",
+        "state": {
+          "branch": null,
+          "revision": "637605dd33bebf0ac46d997169cbe6a537ebe91a",
+          "version": "2.0.0-rc.3.0.1"
+        }
+      },
+      {
         "package": "Console",
         "repositoryURL": "https://github.com/vapor/console.git",
         "state": {
@@ -89,6 +98,15 @@
           "branch": null,
           "revision": "198576a6963973a691baaafdb1a01a078affe65c",
           "version": "3.0.0-rc.2.1.2"
+        }
+      },
+      {
+        "package": "Redis",
+        "repositoryURL": "https://github.com/vapor/redis.git",
+        "state": {
+          "branch": null,
+          "revision": "c47af5baf443f17b8a46821dc166e6d32b17bdd4",
+          "version": "3.0.0-rc.2.2"
         }
       },
       {
