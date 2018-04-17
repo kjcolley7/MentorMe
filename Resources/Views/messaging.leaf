@@ -27,7 +27,10 @@
 					<p class=message-timestamp>Sent: #(message.time)</p>
 				</div>
 				}
-			</div><textarea class="text-input" placeholder="Enter message here" style="margin-top:40px;" maxlength="140"></textarea>
+			<form method="post" action="sendMessage"> 
+				<textarea name="message" class="text-input" placeholder="Enter message here" style="margin-top:40px;" maxlength="140"></textarea>
+			</form>				
+			</div>
 		</div>
 	</div>
 }
