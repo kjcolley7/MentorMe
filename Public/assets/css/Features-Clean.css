@@ -99,10 +99,6 @@ button {
 .navbar.navbar-light.navbar-expand-md.navigation-clean-button {
 }
 
-#profileLink, #becomeMentorButton, #messageButton, #log_in_button, #sign_up_button, #sign_out_button {
-  display:none;
-}
-
 #profilePic {
   text-align:center;
   height:100px;
