@@ -68,10 +68,15 @@ public func configure(
 	services.register(mysqlConfig)
 	
 	// Register custom Redis config
-	let redisConfig = RedisClientConfig(
-		hostname: Environment.get("REDIS_HOSTNAME") ?? "127.0.0.1",
-		password: Environment.get("REDIS_PASSWORD")
-	)
+	// XXX: https://github.com/vapor/redis/pull/99#issuecomment-382139890
+//	let redisConfig = RedisClientConfig(
+//		hostname: Environment.get("REDIS_HOSTNAME") ?? "127.0.0.1",
+//		password: Environment.get("REDIS_PASSWORD")
+//	)
+	let redisHostname = Environment.get("REDIS_HOSTNAME") ?? "127.0.0.1"
+	let redisConnectionString = "redis://\(redisHostname):6379"
+	let redisURL = URL(string: redisConnectionString)
+	let redisConfig = RedisClientConfig(url: redisURL!)
 	services.register(redisConfig)
 	
 	
