@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MentorMe (1)</title>
+    <title>MentorMe</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Actor">
@@ -29,7 +29,8 @@
     <link rel="stylesheet" href="assets/css/Team-Clean.css">
 </head>
 
-<body><nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+<body>
+  <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
     <div class="container"><a href="index.html" class="navbar-brand">MentorMe</a><button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse"
             id="navcol-1">
@@ -44,21 +45,48 @@
               <a class="btn btn-light action-button" id="sign_out_button" role="button" href="login.html">Sign Out</a>
             </span></div>
     </div>
-</nav><div class="newsletter-subscribe">
-    <div class="container">
+</nav>
+<div class="container">
+    <div class="newsletter-subscribe">
         <div class="intro">
             <h2 class="text-center">Find a Mentor</h2>
             <p class="text-center">Input your city and choose a category to start searching for a mentor.</p>
         </div>
-    </div>
+
     <form class="form-inline" method="get">
         <div class="form-group">
         <input type="text" id="cityInput" name="city" style="text-align:center;margin:auto;" placeholder="City" /></div>
-        <div class="form-group" id="drop" name="category"><label></label><select class="form-control"><option>Lumbridge</option><option>Varrock</option><option>Falador</option><option>Camelot</option><option>Castle Wars</option></select></div>
+        <div class="form-group" id="drop" name="category"><label></label><select class="form-control"><option>Food and Drink</option><option>Nature</option><option>Art</option><option>Sports</option><option>Music</option><option>Games</option><option>Parties</option></select></div>
         <div class="form-group">
             <button class="btn" type="submit" id="go"><a>GO</a></button>
         </div>
     </form>
+
+    <div class="map-clean"></div>
+        <h3 class="text-center" id="city_label" style="margin-top:30px;"></h3>
+        <div id="cardHolder">
+            <div id="userCard">
+                <div class="container">
+                    <div class="row">
+                        <div class="col" id="profilePic"><img src="assets/img/2.jpg" style="border-radius:50%;height:100%;"></div>
+                        <div class="col" id="name">
+                            <p id="namePara">Name</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p id="cardStars">☆ &nbsp;☆ &nbsp;☆ &nbsp;☆ &nbsp;☆<br></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p><br>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore<br><br></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
     <div class="map-clean"></div>
     <h3 class="text-center" id="city_label" style="margin-top:30px;"></h3>

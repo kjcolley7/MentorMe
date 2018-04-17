@@ -50,33 +50,30 @@
         <div class="row">
             <div class="col-lg-9 offset-lg-2">
                 <h1>Become a Mentor</h1>
-                <p>Enter the categories you would like to be a mentor for</p>
+                <p>Select the categories you would like to be a mentor for</p>
             </div>
         </div>
     </div>
+
     <div class="container">
+      <form method="post" action="/updateCategories" name="cats">
         <div class="row">
-            <div class="col-lg-8 offset-lg-2" id="tags"><button class="btn btn-primary" type="button" data-toggle="button" aria-pressed="false">Food and Drink</button><button class="btn btn-primary" type="button" data-toggle="button" aria-pressed="false">Nature</button><button class="btn btn-primary"
-                    type="button" data-toggle="button" aria-pressed="false">Art</button><button class="btn btn-primary" type="button" data-toggle="button" aria-pressed="false">Sports</button><button class="btn btn-primary" type="button" data-toggle="button"
-                    aria-pressed="false">Music</button><button class="btn btn-primary" type="button" data-toggle="button" aria-pressed="false">Games</button><button class="btn btn-primary" type="button" data-toggle="button" aria-pressed="false">Parties</button>
-                <button
-                    class="btn btn-primary" type="button" data-toggle="modal" data-target="#addOtherModal">Other</button>
+            <div class="col-lg-8 offset-lg-2">
+              <select name="cats[]" multiple="multiple" size="7">
+                <option value="Food and Drink">Food & Drink</option>
+                <option value="Nature">Nature</option>
+                <option value="Art">Art</option>
+                <option value="Sports">Sports</option>
+                <option value="Music">Music</option>
+                <option value="Games">Games</option>
+                <option value="Parties">Parties</option>
+              </select>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3 offset-lg-5"><button class="btn btn-primary" type="button" id="submit" style="height:75px;border-radius:150px;width:100px;font-size:2.5em;" href="index.html">Go!</button></div>
+            <div class="col-lg-3 offset-lg-2"><button class="btn btn-primary" type="submit" style="height:75px;border-radius:150px;width:100px;font-size:2.5em;">Go!</button></div>
         </div>
-    </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="addOtherModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
-                <div class="modal-body">
-                    <form><input class="form-control" type="text" id="customCategory" placeholder="Your Category"></form>
-                </div>
-                <div class="modal-footer"><button class="btn btn-primary" type="button" id="categorySubmit">Submit</button></div>
-            </div>
-        </div>
+      </form>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
