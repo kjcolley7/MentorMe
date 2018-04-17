@@ -1,16 +1,42 @@
 #set("title") {Search}
 #set("content") {
-    <div class="intro">
-        <h2 class="text-center">Find a Mentor</h2>
-        <p class="text-center">Input your city and choose a category to start searching for a mentor.</p>
+    <div class="newsletter-subscribe">
+        <div class="intro">
+            <h2 class="text-center">Find a Mentor</h2>
+            <p class="text-center">Input your city and choose a category to start searching for a mentor.</p>
+        </div>
+        <form class="form-inline" method="get">
+            <div class="form-group">
+            <input type="text" id="cityInput" name="city" style="text-align:center;margin:auto;" placeholder="City" /></div>
+            <div class="form-group" id="drop" name="category"><label></label><select class="form-control"><option>Lumbridge</option><option>Varrock</option><option>Falador</option><option>Camelot</option><option>Castle Wars</option></select></div>
+            <div class="form-group">
+                <button class="btn" type="submit" id="go"><a>GO</a></button>
+            </div>	
+        </form>
+        <div class="map-clean"></div>
+        <h3 class="text-center" id="city_label" style="margin-top:30px;"></h3>
+        <div id="cardHolder">
+            <div id="userCard">
+                <div class="container">
+                    <div class="row">
+                        <div class="col" id="profilePic"><img src="assets/img/2.jpg" style="border-radius:50%;height:100%;"></div>
+                        <div class="col" id="name">
+                            <p id="namePara">Name</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p id="cardStars">☆ &nbsp;☆ &nbsp;☆ &nbsp;☆ &nbsp;☆<br></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p><br>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore<br><br></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
     </div>
-    <form class="form-inline" method="get">
-        <div class="form-group">
-        <input type="text" id="cityInput" name="city" style="text-align:center;margin:auto;" placeholder="City" /></div>
-        <div class="form-group" id="drop" name="category"><label></label><select class="form-control"><option>Lumbridge</option><option>Varrock</option><option>Falador</option><option>Camelot</option><option>Castle Wars</option></select></div>
-        <div class="form-group">
-            <button class="btn" type="submit" id="go"><a>GO</a></button>
-        </div>	
-    </form>
 }
 #embed("base")
