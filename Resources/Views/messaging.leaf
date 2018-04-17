@@ -1,0 +1,34 @@
+#set("title") {Messaging}
+#set("content") {
+	<div class="row">
+		<div class="col-md-8 col-lg-2">
+			<div class="card">
+				<div class="card-header profile-list" style="height:800px;">
+					<ul class="nav nav-tabs card-header-tabs profile-list">
+						<li class="nav-item"><a class="nav-link"><img class="rounded-circle img-fluid" src="assets/img/2.jpg" width="80"></a></li>
+					</ul>
+					<ul class="nav nav-tabs card-header-tabs">
+						<li class="nav-item"><a class="nav-link"><img class="rounded-circle img-fluid" src="assets/img/2.jpg" width="80"></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 col-lg-9 offset-lg-0">
+			<div class="card">
+				<div class="card-header"><img class="rounded-circle flex-column" src="assets/img/3.jpg" width="80px">
+					<h1 class="text-dark d-inline d-inline-flex" style="padding:0px;padding-right:0px;padding-left:80px;padding-top:0px;padding-bottom:0px;">User</h1>
+				</div>
+				<div class="card"></div>
+			</div>
+			<div class="d-flex flex-column chat">
+				#for(message in conversation) {
+					<div class="bubble #if(message.fromYou) {me} else {you}" style="margin-top:15px">
+					<p>#(message.body)</p>
+					<p class=message-timestamp>Sent: #(message.time)</p>
+				</div>
+				}
+			</div><textarea class="text-input" placeholder="Enter message here" style="margin-top:40px;" maxlength="140"></textarea>
+		</div>
+	</div>
+}
+#embed("base")
