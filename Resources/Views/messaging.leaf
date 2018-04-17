@@ -29,6 +29,7 @@
 				}
 			<form method="post" action="sendMessage"> 
 				<textarea name="message" class="text-input" placeholder="Enter message here" style="margin-top:40px;" maxlength="140"></textarea>
+				<button class="btn btn-primary" type="submit" style="width:67px;margin-left:0px;">Send</button>
 			</form>				
 			</div>
 			<div class="row">
