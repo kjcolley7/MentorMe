@@ -16,14 +16,10 @@
                       <h1>Edit Profile</h1>
                       <hr />
                       <div class="form-row">
-                          <div class="col-sm-12 col-md-6">
-                              <div>First Name</div>
-                              <div class="form-group"><label></label><input id="nameEdit" type="text" class="form-control" name="firstName" /></div>
-                          </div>
-                          <div class="col-sm-12 col-md-6">
-                              <div>Age</div>
-                              <div class="form-group"><label></label><input id="ageEdit" type="number" class="form-control" name="age" /></div>
-                          </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div>First Name</div>
+                            <div class="form-group"><label></label><input id="nameEdit" type="text" class="form-control" name="firstName" /></div>
+                        </div>
                       </div>
                       <div class="col-md-13">
                           <div>Bio
