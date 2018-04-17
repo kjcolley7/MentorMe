@@ -4,6 +4,19 @@
 }
 
 #search {
-  margin-top:50px;
+  margin-top:10px;
+}
+
+#drop {
+  margin-left:50px;
+}
+
+#go {
+  margin-left:30px;
+  outline:auto;
+}
+
+#submit:active {
+  background-color:#5cb85c;
 }
 

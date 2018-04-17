@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MentorMe</title>
+    <title>MentorMe (1)</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Actor">
+    <link rel="stylesheet" href="assets/css/checkbox.css">
     <link rel="stylesheet" href="assets/css/Features-Clean.css">
     <link rel="stylesheet" href="assets/css/Footer-Basic.css">
     <link rel="stylesheet" href="assets/css/Footer-Clean.css">
@@ -48,16 +48,23 @@
     <div></div>
     <div class="register-photo">
         <div class="form-container">
-            <div class="image-holder"></div><form method="post">
+            <div class="image-holder"></div><form method="post" action="/register">
     <h2 class="text-center"><strong>Create</strong> an account.</h2>
-    <div class="form-group"><input type="email" name="email" placeholder="Email" id="email" class="form-control" /></div>
-    <div class="form-group"><input type="password" name="password" placeholder="Password" id="password" class="form-control" /></div>
-    <div class="form-group"><input type="password" name="password-repeat" placeholder="Confirm Password" id="confirm_password" class="form-control" /></div>
-    <div class="form-group"><input type="name" name="firstName" placeholder="First Name" id="firstName" class="form-control" /></div>
-    <div class="form-group"><input type="number" name="age" placeholder="Age" id="age" class="form-control" /></div>
-    <div class="form-group"><input type="city" name="city" placeholder="City" id="city" class="form-control" /></div>
-    <a href="login.html"><div class="form-group"><button class="btn btn-primary btn-block" type="button" id="signup">Sign Up</button></div></a>
-    <a href="login.html" class="already">You already have an account? Login here.</a></form></div>
+    
+    <div class="form-group">
+        <input type="email" name="email" placeholder="Email" id="email" class="form-control" /></div>
+    <div class="form-group">
+        <input type="password" name="password" placeholder="Password" id="password" class="form-control" /></div>
+    <div class="form-group">
+        <input type="password" name="passwordRepeat" placeholder="Confirm Password" id="confirm_password" class="form-control" /></div>
+    <div class="form-group">
+        <input type="name" name="firstName" placeholder="First Name" id="firstName" class="form-control" /></div>
+    <div class="form-group">
+        <input type="city" name="city" placeholder="City" id="city" class="form-control" /></div>
+    <div class="form-group">
+        <button class="btn btn-primary btn-block" type="submit" id="signup">Sign Up</button></div>
+    <a href="login.html" class="already">You already have an account? Login here.</a>
+</form></div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>

@@ -7,8 +7,8 @@
     <title>MentorMe</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Actor">
+    <link rel="stylesheet" href="assets/css/checkbox.css">
     <link rel="stylesheet" href="assets/css/Features-Clean.css">
     <link rel="stylesheet" href="assets/css/Footer-Basic.css">
     <link rel="stylesheet" href="assets/css/Footer-Clean.css">
@@ -44,54 +44,57 @@
               <a class="btn btn-light action-button" id="sign_out_button" role="button" href="login.html">Sign Out</a>
             </span></div>
     </div>
-</nav>
-    <div class="container profile profile-view" id="profile">
-        <div class="row">
-            <div class="col-md-12 alert-col relative">
-                <div class="alert alert-info absolue center" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><span>Profile save with success</span></div>
-            </div>
-        </div>
-        <form><div class="form-row profile-row">
-    <div class="col-md-4 relative">
-        <div class="avatar">
-            <div class="avatar-bg center"></div>
-        </div><input type="file" class="form-control" name="avatar-file" /></div>
-    <div class="col-md-8 col-lg-7">
-        <h1>Edit Profile</h1>
-        <hr />
-        <div class="form-row">
-            <div class="col-sm-12 col-md-6">
-                <div>First Name</div>
-                <div class="form-group"><label></label><input id="nameEdit" type="text" class="form-control" name="firstname" /></div>
-            </div>
-            <div class="col-sm-12 col-md-6">
-                <div>Age</div>
-                <div class="form-group"><label></label><input id="ageEdit" type="number" class="form-control" name="Age" /></div>
-            </div>
-        </div>
-        <div class="col-md-13">
-        <div>Email</div>
-        <div class="form-group"><label></label><input id="emailEdit" type="email" class="form-control" name="email"/></div>
-        </div>
-        <div class="form-row">
-            <div class="col-sm-12 col-md-6">
-                <div>Password</div>
-                <div class="form-group"><label></label><input id="passwordEdit" type="password" class="form-control" name="password" /></div>
-            </div>
-            <div class="col-sm-12 col-md-6">
-                <div>Confirm Password</div>
-                <div class="form-group"><label></label><input  id="confirmpasswordEdit" type="password" class="form-control" name="confirmpass"/></div>
-            </div>
-        </div>
-        <hr />
-        <div class="form-row">
-            <div class="col-md-12 content-right">
-                <button id = "done" class="btn btn-success form-btn" type="link">DONE</button>
-                <button id = "cancel" class="btn btn-danger form-btn" type="reset">CANCEL</button></div>
+</nav><div class="container profile profile-view" id="profile">
+    <div class="row">
+        <div class="col-md-12 alert-col relative">
+            <div role="alert" class="alert alert-info absolue center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><span>Profile save with success</span></div>
         </div>
     </div>
-</div></form>
-    </div>
+    <form method="post" action="/updateProfile">
+            <div class="form-row profile-row">
+                <div class="col-md-4 relative">
+                    <div class="avatar">
+                        <div class="avatar-bg center"></div>
+                    </div><input type="file" class="form-control" name="avatarFile" /></div>
+                <div class="col-md-8 col-lg-7">
+                    <h1>Edit Profile</h1>
+                    <hr />
+                    <div class="form-row">
+                        <div class="col-sm-12 col-md-6">
+                            <div>First Name</div>
+                            <div class="form-group"><label></label><input id="nameEdit" type="text" class="form-control" name="firstName" /></div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div>Age</div>
+                            <div class="form-group"><label></label><input id="ageEdit" type="number" class="form-control" name="age" /></div>
+                        </div>
+                    </div>
+                    <div class="col-md-13">
+                        <div>Bio</div>
+                        <div class="form-group"><label></label><input type="text" class="form-control" name="bio" /></div>
+                    </div>
+                    <div class="col-md-13">
+                        <div>Email</div>
+                        <div class="form-group"><label></label><input id="emailEdit" type="email" class="form-control" name="email" /></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-sm-12 col-md-6">
+                            <div>Password</div>
+                            <div class="form-group"><label></label><input id="passwordEdit" type="password" class="form-control" name="password" /></div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div>Confirm Password</div>
+                            <div class="form-group"><label></label><input id="confirmpasswordEdit" type="password" class="form-control" name="confirmPassword" /></div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-row">
+                        <div class="col-md-12 content-right"><button id="done" class="btn btn-success form-btn" type="submit">DONE</button><button id="cancel" class="btn btn-danger form-btn" type="reset">CANCEL</button></div>
+                    </div>
+                </div>
+            </div>
+        </form>
+</div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/custom.js"></script>

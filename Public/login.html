@@ -7,8 +7,8 @@
     <title>MentorMe</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Actor">
+    <link rel="stylesheet" href="assets/css/checkbox.css">
     <link rel="stylesheet" href="assets/css/Features-Clean.css">
     <link rel="stylesheet" href="assets/css/Footer-Basic.css">
     <link rel="stylesheet" href="assets/css/Footer-Clean.css">
@@ -51,12 +51,18 @@
         <strong>Wrong User/Password.</strong> Please try again
     </div>
 </div>
-<form method="post">
+<form method="post" action="/login">
     <h2 class="sr-only">Login Form</h2>
     <div class="illustration"><i class="fa fa-user"></i></div>
-    <div class="form-group"><input class="form-control" type="email" id="username" name="email" placeholder="Email" /></div>
-    <div class="form-group"><input type="password" name="password" placeholder="Password" id = "pass" class="form-control" /></div>
-    <div id="signed"><div class="form-group"><button class="btn btn-primary btn-block" type="button">Log In</button></div></div><a href="#" class="forgot">Forgot your email or password?</a></form></div>
+    <div class="form-group">
+        <input class="form-control" type="email" id="username" name="email" placeholder="Email" /></div>
+    <div class="form-group">
+        <input type="password" name="password" placeholder="Password" id = "pass" class="form-control" /></div>
+    <div id="signed"><div class="form-group">
+        <button class="btn btn-primary btn-block" type="submit">Log In</button>
+        </div>
+    </div>
+</form></div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/custom.js"></script>
