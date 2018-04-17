@@ -44,12 +44,12 @@ extension Router {
 		}
 		
 		// FIXME: What's the proper way to access env.isRelease here?
-		if Environment.get("prod") == nil {
+//		if Environment.get("prod") == nil {
 			// GET /foo/json -> JSON
 			let jsonComponents = DynamicPathComponent.constant(PathComponent(string: "json")).makeDynamicPathComponents()
 			on(.GET, at: pathComponents + jsonComponents) { req -> Future<T> in
 				return try contextWithUser(req)
 			}
-		}
+//		}
 	}
 }
