@@ -1,0 +1,29 @@
+#set("title") {Profile}
+#set("content") {
+  <div class="profile-card">
+      <div class="profile-back"></div><img class="rounded-circle profile-pic" src="assets/img/2.jpg" />
+      <h3 id="nameHeading" class="profile-name"></h3><i class="fa fa-star-o" id="star_one"></i><i class="fa fa-star-o" id="star_two"></i><i class="fa fa-star-o" id="star_three"></i><i class="fa fa-star-o" id="star_four"></i><i class="fa fa-star-o" id="star_five"></i>
+      <div class="card" style="margin:0px;width:auto;height:auto;">
+          <div class="card-header" style="  margin:50px;">
+              <div class="card">
+                  <div class="card-body">
+                      <h4 class="card-title" id="namesProfile">#(firstName)'s Profile</h4>
+                      <h6 class="text-muted card-subtitle mb-2" id="cityPlaceHolder"><i class="icon ion-ios-location" style="  font-size:20px;"></i>#(city)</h6>
+                      <p class="card-text" id="details">#(bio)</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div>
+      <div class="container">
+          <div class="row">
+              <div class="col-md-6 col-lg-6 col-xl-4 offset-lg-0 offset-xl-3">
+                  <p><strong>Contact</strong></p><i class="fa fa-wechat" style="color:rgb(31,125,155);font-size:40px;"></i></div>
+              <div class="col-md-6 col-xl-3 offset-xl-0"><p><div class="col-md-12 content-right">
+                <button id="editButton" class="btn btn-success form-btn" type="link"><a href="editProfile.html">EDIT PROFILE</a></button></div></p></div>
+          </div>
+      </div>
+  </div>
+}
+#embed("base")
