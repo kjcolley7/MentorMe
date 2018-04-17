@@ -1,0 +1,16 @@
+.btn:not(:disabled):not(.disabled) {
+  background-color:#275588;
+}
+
+button.btn btn-primary active {
+  background-color:white;
+  color:white;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active {
+  background-color:rgb(84,179,60);
+}
+
+.btn:not(:disabled):not(.disabled) {
+  border-radius:20%;
+}
