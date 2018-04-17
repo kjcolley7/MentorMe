@@ -22,6 +22,14 @@ $("#stars").click(function(e){
         for(i = i; i < 5; i++)
             newText += '☆'
         $(this).html(newText);
+        $.ajax({
+          type: 'post',
+          url: '/api/v1/rating',
+          data: JSON.stringify(rating),
+          success: function(results) {
+            alert("Rating sent");
+          }
+        })
 });
 
 $("#categorySubmit").click(function(e){
@@ -34,5 +42,4 @@ function AddCustomTag()
    var newCategory = $("#customCategory").val();
    var tagsCol = $("#tags");
    tagsCol.prepend('<button class="btn btn-primary active" type="button" data-toggle="button" aria-pressed="true">'+newCategory+'</button>');
-
 }

@@ -30,7 +30,19 @@
     <link rel="stylesheet" href="assets/css/Messaging.css">
 </head>
 
-<body><nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+<body>
+    <div class="modal fade" role="dialog" tabindex="-1" id="reviewModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Leave a review</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+                    <p id="stars">☆☆☆☆☆</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
     <div class="container"><a href="index.html" class="navbar-brand">MentorMe</a><button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse"
             id="navcol-1">
@@ -65,6 +77,7 @@
                     <div class="card">
                         <div class="card-header"><img class="rounded-circle flex-column" src="assets/img/3.jpg" width="80px">
                             <h1 class="text-dark d-inline d-inline-flex" style="padding:0px;padding-right:0px;padding-left:80px;padding-top:0px;padding-bottom:0px;">User</h1>
+                            <button id="endMentorshipButton" class="btn btn-primary" type="button" data-toggle="modal" data-target="#reviewModal">End mentorship</button>
                         </div>
                         <div class="card"></div>
                     </div>
