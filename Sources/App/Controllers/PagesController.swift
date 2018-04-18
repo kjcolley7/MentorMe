@@ -10,6 +10,10 @@ final class PagesController: RouteCollection {
 		let authController = AuthController()
 		try router.register(collection: authController)
 		
+		// Searching for a mentor
+		let searchController = SearchController()
+		try router.register(collection: searchController)
+		
 		// Add an index route for listing all available pages
 		router.getTemplate("pages", template: "index", contextGetter: pages)
 		
@@ -36,7 +40,8 @@ final class PagesController: RouteCollection {
 					"/",
 					"/categories",
 					"/login",
-					"/register"
+					"/register",
+					"/search"
 				]
 			)
 		}
