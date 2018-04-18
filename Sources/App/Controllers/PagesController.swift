@@ -14,11 +14,7 @@ final class PagesController: RouteCollection {
 		router.getTemplate("pages", template: "index", contextGetter: pages)
 		
 		// Add homepage view
-		router.get(use: homepage)
-	}
-	
-	func homepage(_ req: Request) throws -> Future<View> {
-		return try req.view().render("homepage")
+		router.getTemplate(template: "homepage", contextGetter: EmptyTemplateContext.contextGetter)
 	}
 	
 	struct IndexContext: TemplateContext {
