@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/vapor/auth.git",
         "state": {
           "branch": null,
-          "revision": "637605dd33bebf0ac46d997169cbe6a537ebe91a",
-          "version": "2.0.0-rc.3.0.1"
+          "revision": "c88227ea542c2a2b699d8f5b9f44531248902584",
+          "version": "2.0.0-rc.3.1"
         }
       },
       {
@@ -47,15 +47,6 @@
         }
       },
       {
-        "package": "Engine",
-        "repositoryURL": "https://github.com/vapor/engine.git",
-        "state": {
-          "branch": null,
-          "revision": "bcc330e964a0a294afb9c829b6e6b4626cdea427",
-          "version": "3.0.0-rc.2.4"
-        }
-      },
-      {
         "package": "Fluent",
         "repositoryURL": "https://github.com/vapor/fluent.git",
         "state": {
@@ -71,6 +62,15 @@
           "branch": null,
           "revision": "7cf4f25b5b8fd22b373944750c6c50b6ddbc8024",
           "version": "3.0.0-rc.2.3"
+        }
+      },
+      {
+        "package": "HTTP",
+        "repositoryURL": "https://github.com/vapor/http.git",
+        "state": {
+          "branch": null,
+          "revision": "2cb664097006e3fda625934079b51c90438947e1",
+          "version": "3.0.0"
         }
       },
       {
@@ -105,8 +105,8 @@
         "repositoryURL": "https://github.com/vapor/redis.git",
         "state": {
           "branch": null,
-          "revision": "b0ad37902f987968e399a4ea1715b0e44574f9f2",
-          "version": "3.0.0-rc.2.3"
+          "revision": "09e6b25743dfc4deebe2f18ec9e3918edfa61802",
+          "version": "3.0.0-rc.2.4"
         }
       },
       {
@@ -177,8 +177,8 @@
         "repositoryURL": "https://github.com/vapor/url-encoded-form.git",
         "state": {
           "branch": null,
-          "revision": "aca8efc7176f3ea2352dcbcd32526f82af5647c3",
-          "version": "1.0.1"
+          "revision": "8448fa943057c01220f6a940d3b1b8e9fd92a96e",
+          "version": "1.0.2"
         }
       },
       {
@@ -195,8 +195,17 @@
         "repositoryURL": "https://github.com/vapor/vapor.git",
         "state": {
           "branch": null,
-          "revision": "752e6a6c392f18e4986e2251c5db76fd7f79d4e9",
-          "version": "3.0.0-rc.2.5"
+          "revision": "95f94041400f54d0442d1dd5f12f91868d1a2a1c",
+          "version": "3.0.0-rc.2.6"
+        }
+      },
+      {
+        "package": "WebSocket",
+        "repositoryURL": "https://github.com/vapor/websocket.git",
+        "state": {
+          "branch": null,
+          "revision": "23acd21aa37a200faa2f5d5525c974efa6b5676c",
+          "version": "1.0.0"
         }
       }
     ]
