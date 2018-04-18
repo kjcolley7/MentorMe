@@ -95,11 +95,11 @@ public func configure(
 	// Register Redis as our preferred KeyedCache
 	// FIXME: DOESN'T WORK - https://github.com/vapor/redis/issues/98
 	config.prefer(RedisClient.self, for: KeyedCache.self)
+	#endif
+	
 	
 	// Register KeyedCacheSessions (now backed by Redis) as our prefered Sessions
 	config.prefer(KeyedCacheSessions.self, for: Sessions.self)
-	#endif
-	
 	
 	// Register BCryptDigest as our prefered PasswordVerifier
 	config.prefer(BCryptDigest.self, for: PasswordVerifier.self)

@@ -21,7 +21,7 @@ final class PagesController: RouteCollection {
 		return try req.view().render("homepage")
 	}
 	
-	final class IndexContext: TemplateContext {
+	struct IndexContext: TemplateContext {
 		var user: UserProfile?
 		let pages: [String]
 		
@@ -32,11 +32,17 @@ final class PagesController: RouteCollection {
 	}
 	
 	/// Render a list of available pages using index.leaf
-	func pages(_ req: Request) throws -> Future<IndexContext> {
+	func pages(_ req: Request, profile: UserProfile? = nil) throws -> Future<IndexContext> {
 		return Future<IndexContext>.map(on: req) {
-			return IndexContext(pages: [
-				"/categories"
-			])
+			return IndexContext(
+				user: profile,
+				pages: [
+					"/",
+					"/categories",
+					"/login",
+					"/register"
+				]
+			)
 		}
 	}
 }

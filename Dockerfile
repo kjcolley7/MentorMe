@@ -8,14 +8,14 @@ WORKDIR /vapor
 COPY Package.swift ./
 RUN swift package update
 COPY Tests ./Tests
-WORKDIR /vapor/Sources/Run
-WORKDIR /vapor/Sources/App
-WORKDIR /vapor
-RUN touch Sources/Run/fake.swift Sources/App/fake.swift
-RUN swift build
-RUN rm -rf Sources/
+# WORKDIR /vapor/Sources/Run
+# WORKDIR /vapor/Sources/App
+# WORKDIR /vapor
+# RUN touch Sources/Run/fake.swift Sources/App/fake.swift
+# RUN swift build -c release
+# RUN rm -rf Sources/
 COPY Sources ./Sources
-RUN swift build
+RUN swift build -c release
 RUN rm -rf Sources Package.resolved Package.swift
 COPY docker-entrypoint.sh ./
 ENV ["SERVER_LISTEN", "SERVER_PORT", "SERVER_MAX_BODY_SIZE"]

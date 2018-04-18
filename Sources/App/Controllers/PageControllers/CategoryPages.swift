@@ -12,7 +12,7 @@ final class CategoryPages: RouteCollection {
 	}
 	
 	
-	final class IndexContext: TemplateContext {
+	struct IndexContext: TemplateContext {
 		var user: UserProfile?
 		let categories: [Category]
 		
@@ -23,14 +23,14 @@ final class CategoryPages: RouteCollection {
 	}
 	
 	/// Context given to categories.leaf
-	func indexContext(_ req: Request) -> Future<IndexContext> {
+	func indexContext(_ req: Request, profile: UserProfile? = nil) -> Future<IndexContext> {
 		return Category.query(on: req).all().map(to: IndexContext.self) { categories in
-			return IndexContext(categories: categories)
+			return IndexContext(user: profile, categories: categories)
 		}
 	}
 	
 	
-	final class CategoryContext: TemplateContext {
+	struct CategoryContext: TemplateContext {
 		var user: UserProfile?
 		let id: Category.ID
 		let name: String
@@ -45,10 +45,11 @@ final class CategoryPages: RouteCollection {
 	}
 	
 	/// Context given to category.leaf
-	func categoryContext(_ req: Request) throws -> Future<CategoryContext> {
+	func categoryContext(_ req: Request, profile: UserProfile? = nil) throws -> Future<CategoryContext> {
 		return try req.parameter(Category.self).flatMap(to: CategoryContext.self) { category in
 			return try category.sampleQuestions().query(on: req).all().map(to: CategoryContext.self) { sampleQuestions in
 				return try CategoryContext(
+					user: profile,
 					id: category.requireID(),
 					name: category.name,
 					sampleQuestions: sampleQuestions

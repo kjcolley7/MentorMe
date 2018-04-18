@@ -14,10 +14,5 @@ if [ -n "$MYSQL_HOSTNAME" ]; then
 fi
 
 # Start Vapor app
-if [ -f /vapor/.build/release/Run ]; then
-	echo "Starting Vapor app in release mode"
-	exec /vapor/.build/release/Run --env prod
-else
-	echo "Starting Vapor app in debug mode"
-	exec /vapor/.build/debug/Run
-fi
+echo "Starting release build of Vapor app in production mode"
+exec /vapor/.build/release/Run --env production

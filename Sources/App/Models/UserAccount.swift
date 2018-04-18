@@ -92,7 +92,7 @@ struct UserProfile: Content {
 	let email: String
 	let name: String
 	let city: String
-	let joinedAt: Date
+	let joinedAt: String
 }
 
 extension UserAccount {
@@ -103,7 +103,7 @@ extension UserAccount {
 			email: email,
 			name: name,
 			city: city,
-			joinedAt: joinedAt
+			joinedAt: "\(joinedAt.timeIntervalSince1970)"
 		)
 	}
 }

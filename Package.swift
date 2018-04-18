@@ -17,7 +17,7 @@ let package = Package(
 		.package(url: "https://github.com/vapor/auth.git", from: "2.0.0-rc.3.0.1"),
 		
 		// ⚡️Non-blocking, event-driven Redis client.
-		.package(url: "https://github.com/vapor/redis.git", from: "3.0.0-rc.2.2")
+		.package(url: "https://github.com/vapor/redis.git", from: "3.0.0-rc.2.3")
 	],
 	targets: [
 		.target(name: "App", dependencies: [
