@@ -36,5 +36,8 @@
         <h3 class="text-center">Try Finding a Mentor in Your City</h3>
         <p class="text-center">Input your city below to start searching for a mentor.</p>
     </div>
+		<div class="text-center">
+			<button class="btn" type="submit" id="go"><a>GO</a></button>
+		</div>
 }
 #embed("base")

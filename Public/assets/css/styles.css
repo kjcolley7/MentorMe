@@ -20,3 +20,11 @@
   background-color:#5cb85c;
 }
 
+#chat{
+  height:410px;
+  overflow-y: scroll;
+}
+
+#textArea{
+  height:70px;
+}

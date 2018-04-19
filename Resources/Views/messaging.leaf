@@ -17,23 +17,25 @@
 			<div class="card">
 				<div class="card-header"><img class="rounded-circle flex-column" src="assets/img/3.jpg" width="80px">
 					<h1 class="text-dark d-inline d-inline-flex" style="padding:0px;padding-right:0px;padding-left:80px;padding-top:0px;padding-bottom:0px;">User</h1>
+					<button id="endMentorshipButton" class="btn btn-primary" type="button" data-toggle="modal" data-target="#reviewModal">End mentorship</button>
 				</div>
 				<div class="card"></div>
 			</div>
-			<div class="d-flex flex-column chat">
+			<div class="d-flex flex-column chat" id="chat">
 				#for(message in conversation) {
 					<div class="bubble #if(message.fromYou) {me} else {you}" style="margin-top:15px">
 					<p>#(message.body)</p>
 					<p class=message-timestamp>Sent: #(message.time)</p>
 				</div>
 				}
-			<form method="post" action="sendMessage"> 
-				<textarea name="message" class="text-input" placeholder="Enter message here" style="margin-top:40px;" maxlength="140"></textarea>
-				<button class="btn btn-primary" type="submit" style="width:67px;margin-left:0px;">Send</button>
-			</form>				
-			</div>
+				</div>
+			<form method="post" action="sendMessage">
+				<textarea name="message" class="text-input" placeholder="Enter message here" style="margin-top:40px;" maxlength="140" id="textArea"></textarea>
+				<button class="btn btn-success" type="submit" style="width:67px;margin-left:800px;">Send</button>
+			</form>
 			<div class="row">
     			<div class="col" style="margin-top:30px;">
+						<h1 class="text-dark d-inline d-inline-flex" style="padding:0px;padding-right:0px;padding-left:20px;padding-top:0px;padding-bottom:0px;">Sample Questions</h1>
         			<ul class="sample-questions">
         			#for(question in sampleQuestions) {
         				<li>#(question)</li>
