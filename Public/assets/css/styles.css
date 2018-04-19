@@ -12,8 +12,23 @@
 }
 
 #go {
-  margin-left:30px;
   outline:auto;
+  font-weight:bold;
+  font-size:16px;
+  letter-spacing:0.4px;
+  line-height:1;
+  padding:16px 32px;
+  margin-top:20px;
+}
+
+#go2 {
+  outline:auto;
+  font-weight:bold;
+  font-size:16px;
+  letter-spacing:0.4px;
+  line-height:1;
+  padding:16px 32px;
+  margin-left:15px;
 }
 
 #submit:active {

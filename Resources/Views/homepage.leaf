@@ -33,12 +33,10 @@
     	</div>
 	</div>
 	<div class="intro" id="search">
-        <h3 class="text-center">Try Finding a Mentor in Your City</h3>
-    </div>
-		<div class="newsletter-subscribe">
-			<form class="form-inline">
-				<button class="btn" type="submit" id="go"><a>GO</a></button>
-			</form>
-		</div>
+      <h3 class="text-center">Try Finding a Mentor in Your City</h3>
+  </div>
+	<div class="d-flex justify-content-center">
+		<a href="/search" class="btn mx-auto" role="button" type="link" id="go">GO</a>
+	</div>
 }
 #embed("base")
