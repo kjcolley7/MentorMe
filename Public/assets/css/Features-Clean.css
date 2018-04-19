@@ -91,10 +91,6 @@
   font-size:4.5em;
 }
 
-button {
-  margin:10px;
-}
-
 .badge.badge-secondary {
   margin-right:10px;
 }
@@ -105,9 +101,6 @@ button {
   box-shadow:0 0 6px #B2B2B2;
   display:inline-block;
   padding:10px 18px;
-}
-
-.navbar.navbar-light.navbar-expand-md.navigation-clean-button {
 }
 
 #profilePic {
