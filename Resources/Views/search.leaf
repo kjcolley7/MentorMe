@@ -33,7 +33,10 @@
 					</div>
 					<div class="row">
 						<div class="col">
-							<p id="cardStars">☆ &nbsp;☆ &nbsp;☆ &nbsp;☆ &nbsp;☆<br></p>
+							<p id="cardStars">
+								#(ratingHTML)
+								#/*<span id="highlightedStars">★★★★</span><span id="unHighlightedStars">☆</span>*/
+							</p>
 						</div>
 					</div>
 					<div class="row">

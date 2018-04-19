@@ -21,6 +21,17 @@
   color:inherit;
 }
 
+
+
+#highlightedStars{
+  color: gold;
+}
+
+#unHighlightedStars{
+  color: black;
+  font-size: .84em;
+}
+
 @media (max-width:767px) {
   .features-clean h2 {
     margin-bottom:25px;
@@ -116,18 +127,20 @@ button {
 
 #cardHolder {
   text-align:center;
+  visibility: none;
   margin:auto;
   width:80%;
-  padding:50px;
-  background-color:#989898;
+  padding:25px;
   border-radius:10%;
   max-width:750px;
 }
 
 #userCard {
-  background-color:#1d1e28;
+  background-color: white;
+  color: black;
   border-radius:5%;
   margin-bottom:30px;
+  box-shadow: 3px 3px 5px 6px black;
 }
 
 #cardStars {
