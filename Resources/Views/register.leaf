@@ -22,6 +22,13 @@
 					<input type="city" name="city" placeholder="City" id="city" class="form-control" />
 				</div>
 				<div class="form-group">
+					<select name="state" type="state" id="state" class="form-control">
+						#for(state in states) {
+							<option value=#(state)>#(state)</option>
+						}
+					</select>
+				</div>
+				<div class="form-group">
 					<a href="login.html">
 						<button class="btn btn-primary btn-block" type="submit" id="signup">Sign Up</button>
 					</a>
