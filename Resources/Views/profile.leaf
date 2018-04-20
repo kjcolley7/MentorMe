@@ -29,23 +29,14 @@
 			</div>
 		</div>
 	</div>
-	<div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6 col-lg-6 col-xl-4 offset-lg-0 offset-xl-3">
-					<p>
-						<strong>Contact</strong>
-					</p>
-					<i class="fa fa-wechat" style="color:rgb(31,125,155);font-size:40px;"></i>
-				</div>
-				<div class="col-md-6 col-xl-3 offset-xl-0">
-					<p>
-						<div class="col-md-12 content-right">
-							<a class="btn btn-primary" href="/editProfile">Edit Profile</a>
-						</div>
-					</p>
-				</div>
-			</div>
+	<div class="row">
+		<div class="col-md-4">
+			<a href="/messaging" class="btn" role="button" type="link" id="go3">CONTACT</a>
+		</div>
+		<div class= "col-md-4">
+		</div>
+		<div class= "col-md-4">
+				<a href="/editProfile" class="btn" role="button" type="link" id="go4">EDIT PROFILE</a>
 		</div>
 	</div>
 }
