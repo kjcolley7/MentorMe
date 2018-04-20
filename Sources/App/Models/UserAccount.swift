@@ -13,7 +13,7 @@ final class UserAccount: MySQLModel {
 	var city: String
 	var stateID: Int
 	var joinedAt: Date
-	
+
 	init(
 		id: Int? = nil,
 		email: String,
@@ -33,7 +33,7 @@ final class UserAccount: MySQLModel {
 		self.stateID = stateID
 		self.joinedAt = joinedAt ?? Date()
 	}
-	
+
 	convenience init(
 		email: String,
 		password: String,
@@ -48,7 +48,7 @@ final class UserAccount: MySQLModel {
 		{
 			throw Abort(.badRequest, reason: "Passwords do not match")
 		}
-		
+
 		try self.init(
 			email: email,
 			passwordHash: BCrypt.hash(password).convert(),
@@ -64,7 +64,7 @@ extension UserAccount: Migration {
 	static func prepare(on connection: MySQLConnection) -> Future<Void> {
 		return Database.create(self, on: connection) { builder in
 			try addProperties(to: builder)
-			
+
 			// Email is UNIQUE
 			try builder.addIndex(to: \.email, isUnique: true)
 		}
@@ -77,7 +77,7 @@ extension UserAccount: PasswordAuthenticatable {
 	static var usernameKey: WritableKeyPath<UserAccount, String> {
 		return \UserAccount.email
 	}
-	
+
 	static var passwordKey: WritableKeyPath<UserAccount, String> {
 		return \UserAccount.passwordHash
 	}
@@ -104,7 +104,7 @@ extension UserAccount {
 				city: city,
 				state: state
 			).create(on: connection).catchMap { error in
-				throw Abort(.badRequest, reason: "An account with that email already exists. (\(error))")
+				throw Abort(.badRequest, reason: "An account with that email already exists.")
 			}
 		}
 		catch {
