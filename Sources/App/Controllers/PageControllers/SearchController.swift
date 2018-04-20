@@ -2,22 +2,18 @@ import Vapor
 
 final class SearchController: RouteCollection {
 	func boot(router: Router) throws {
-		router.getTemplate("search", template: "search", contextGetter: search)
+		router.getTemplate("search", template: "search", contextGetter: searchPage)
 	}
 	
 	struct SearchContext: TemplateContext {
-		var user: UserProfile?
+		let user: UserProfile?
+		let alert: Alert?
 		let categories: [Category]
-		
-		init(user: UserProfile? = nil, categories: [Category]) {
-			self.user = user
-			self.categories = categories
-		}
 	}
 	
-	func search(_ req: Request, profile: UserProfile? = nil) throws -> Future<SearchContext> {
-		return try Category.query(on: req).sort(\Category.id, .ascending).all().map { categories in
-			return SearchContext(user: profile, categories: categories)
+	func searchPage(_ req: Request, profile: UserProfile? = nil, alert: Alert? = nil) throws -> Future<SearchContext> {
+		return try Category.getAll(on: req).map { categories in
+			return SearchContext(user: profile, alert: alert, categories: categories)
 		}
 	}
 }

@@ -5,19 +5,19 @@ final class CategoryController: RouteCollection {
 	func boot(router: Router) throws {
 		let categoryg = router.grouped("categories")
 		
-		// GET /categories
+		// GET /api/v1/categories
 		categoryg.get(use: index)
 		
-		// GET /categories/:categoryID
+		// GET /api/v1/categories/:categoryID
 		categoryg.get(Category.parameter, use: get)
 		
-		// GET /categories/:categoryID/sampleQuestions
+		// GET /api/v1/categories/:categoryID/sampleQuestions
 		categoryg.get(Category.parameter, "sampleQuestions", use: listSampleQuestions)
 	}
 	
 	/// Returns a list of all `Category`s.
 	func index(_ req: Request) throws -> Future<[Category]> {
-		return Category.query(on: req).all()
+		return try Category.getAll(on: req)
 	}
 	
 	/// Returns an individual `Category`.

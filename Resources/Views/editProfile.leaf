@@ -1,52 +1,79 @@
 #set("title") {Edit Profile}
 #set("content") {
-  <div class="container profile profile-view" id="profile">
-      <div class="row">
-          <div class="col-md-12 alert-col relative">
-              <div role="alert" class="alert alert-info absolue center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><span>Profile save with success</span></div>
-          </div>
-      </div>
-      <form method="post" action="/updateProfile">
-              <div class="form-row profile-row">
-                  <div class="col-md-4 relative">
-                      <div class="avatar">
-                          <div class="avatar-bg center"></div>
-                      </div><input type="file" class="form-control" name="avatarFile" /></div>
-                  <div class="col-md-8 col-lg-7">
-                      <h1>Edit Profile</h1>
-                      <hr />
-                      <div class="form-row">
-                        <div class="col-sm-12 col-md-6">
-                            <div>First Name</div>
-                            <div class="form-group"><label></label>
-                              <input id="nameEdit" type="text" class="form-control" name="firstName" placeholder="#(firstName)"/></div>
-                        </div>
-                      </div>
-                      <div class="col-md-13">
-                          <div>Bio
-                          <div class="form-group"><label></label><input type="text" class="form-control" name="bio" placeholder="#(bio)"/></div>
-                      </div>
-                      <div class="col-md-13">
-                          <div>Email</div>
-                          <div class="form-group"><label></label><input id="emailEdit" type="email" class="form-control" name="email" placeholder="#(email)"/></div>
-                      </div>
-                      <div class="form-row">
-                          <div class="col-sm-12 col-md-6">
-                              <div>Password</div>
-                              <div class="form-group"><label></label><input id="passwordEdit" type="password" class="form-control" name="password" /></div>
-                          </div>
-                          <div class="col-sm-12 col-md-6">
-                              <div>Confirm Password</div>
-                              <div class="form-group"><label></label><input id="confirmpasswordEdit" type="password" class="form-control" name="confirmPassword" /></div>
-                          </div>
-                      </div>
-                      <hr />
-                      <div class="form-row">
-                          <div class="col-md-12 content-right"><button id="done" class="btn btn-success form-btn" type="submit">DONE</button><button id="cancel" class="btn btn-danger form-btn" type="reset">CANCEL</button></div>
-                      </div>
-                  </div>
-              </div>
-          </form>
-  </div>
+	<div class="container profile profile-view" id="profile">
+		<form method="post" action="/editProfile">
+			<div class="form-row profile-row">
+				<div class="col-md-4 relative">
+					<div class="avatar">
+						<div class="avatar-bg center"></div>
+					</div>
+					<input type="file" class="form-control" name="avatarFile" />
+				</div>
+			<div class="col-md-8 col-lg-7">
+				<h1>Edit Profile</h1>
+				<hr />
+				<div class="form-row">
+					<div class="col">
+						<div class="form-group">
+							<input id="nameEdit" type="text" class="form-control" name="name" placeholder="Name" value="#(user.name)"/>
+						</div>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="col">
+						<div class="form-group">
+							<textarea id="bioEdit" type="text" class="form-control" name="bio" placeholder="Bio">#(user.bio)</textarea>
+						</div>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="col">
+						<div class="form-group">
+							<input id="emailEdit" type="email" class="form-control" name="email" placeholder="Email" value="#(user.email)"/>
+						</div>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="col">
+						<div class="form-group">
+							<input id="cityEdit" type="text" class="form-control" name="city" placeholder="City" value="#(user.city)"/>
+						</div>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="col">
+						<div class="form-group">
+							<select name="state" class="form-control">
+							#for(state in states) {
+								<option value="#(state.id)" #if(state.id == user.state.id) {selected}>#(state.name)</option>
+							}
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="col-sm-12 col-md-6">
+						<div class="form-group">
+							<input id="passwordEdit" type="password" class="form-control" name="password" placeholder="Password" />
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-6">
+						<div class="form-group">
+							<input id="confirmpasswordEdit" type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" />
+						</div>
+					</div>
+				</div>
+				<hr />
+				<div class="form-row">
+					<div class="col-md-12 content-right">
+						<div class="form-group">
+							<button id="done" class="btn btn-success form-btn" type="submit">Update</button>
+							<button id="cancel" class="btn btn-danger form-btn" type="reset">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
 }
 #embed("base")

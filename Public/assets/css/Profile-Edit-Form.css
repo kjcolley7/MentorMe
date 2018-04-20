@@ -10,7 +10,7 @@ div.container.profile {
   position:relative;
 }
 
-.absolue {
+.absolute {
   position:absolute;
 }
 
@@ -18,21 +18,16 @@ div.profile-row {
   margin-top:55px;
 }
 
-.absolue.center {
+.absolute.center {
   left:50%;
   top:50%;
   transform:translate(-50%, 0%);
-}
-
-div.alert {
-  width:40%;
 }
 
 .alert-col > .alert {
   padding:10px;
   border-radius:0;
   transition:all 0.5s ease;
-  opacity:0;
 }
 
 hr {

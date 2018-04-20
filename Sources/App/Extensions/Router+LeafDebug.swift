@@ -2,16 +2,23 @@ import Routing
 import Vapor
 import Leaf
 
+
 protocol TemplateContext: Content {
-	var user: UserProfile? { get set }
+	var user: UserProfile? { get }
+	var alert: Alert? { get }
 }
 
 struct EmptyTemplateContext: TemplateContext {
-	var user: UserProfile?
+	let user: UserProfile?
+	let alert: Alert?
 	
-	static func contextGetter(_ req: Request, _ profile: UserProfile? = nil) throws -> Future<EmptyTemplateContext> {
+	static func contextGetter(
+		_ req: Request,
+		_ profile: UserProfile? = nil,
+		_ alert: Alert? = nil
+	) throws -> Future<EmptyTemplateContext> {
 		return .map(on: req) {
-			return EmptyTemplateContext(user: profile)
+			return EmptyTemplateContext(user: profile, alert: alert)
 		}
 	}
 }
@@ -21,27 +28,18 @@ extension Router {
 	func getTemplate<T>(
 		_ path: DynamicPathComponentRepresentable...,
 		template: String,
-		contextGetter: @escaping (_ req: Request, _ profile: UserProfile?) throws -> Future<T>
+		contextGetter: @escaping (_ req: Request, _ profile: UserProfile?, _ alert: Alert?) throws -> Future<T>
 	) where T: TemplateContext {
-		func contextWithUser(_ req: Request) throws -> Future<T> {
-			let profile: UserProfile?
-			if let userOpt = try? req.authenticated(UserAccount.self),
-				let user = userOpt,
-				let userProfile = try? user.getProfile()
-			{
-				profile = userProfile
-			}
-			else {
-				profile = nil
-			}
-			
-			return try contextGetter(req, profile)
-		}
-		
 		// GET /foo -> View
 		let pathComponents = path.makeDynamicPathComponents()
 		on(.GET, at: pathComponents) { req -> Future<View> in
-			return try contextWithUser(req).flatMap(to: View.self) { context -> Future<View> in
+			return try contextGetter(req, req.profile, nil).flatMap(to: View.self) { context -> Future<View> in
+				return try (req.view() as TemplateRenderer).render(template, context)
+			}.catchFlatMap { error in
+				let context = EmptyTemplateContext(
+					user: req.profile,
+					alert: Alert.fromError(error)
+				)
 				return try (req.view() as TemplateRenderer).render(template, context)
 			}
 		}
@@ -52,7 +50,7 @@ extension Router {
 			let jsonComponents = DynamicPathComponent.constant(PathComponent(string: "json")).makeDynamicPathComponents()
 			on(.GET, at: pathComponents + jsonComponents) { req -> Future<T> in
 				do {
-					return try contextWithUser(req)
+					return try contextGetter(req, req.profile, nil)
 				} catch {
 					return req.eventLoop.newFailedFuture(error: error)
 				}

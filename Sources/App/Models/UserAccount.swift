@@ -3,24 +3,46 @@ import Vapor
 import Authentication
 import Crypto
 
+
 final class UserAccount: MySQLModel {
 	var id: Int?
 	var email: String
 	var passwordHash: String
 	var name: String
+	var bio: String
 	var city: String
+	var stateID: Int
 	var joinedAt: Date
 	
-	init(id: Int? = nil, email: String, passwordHash: String, name: String, city: String, joinedAt: Date? = nil) {
+	init(
+		id: Int? = nil,
+		email: String,
+		passwordHash: String,
+		name: String,
+		bio: String,
+		city: String,
+		stateID: Int,
+		joinedAt: Date? = nil
+	) {
 		self.id = id
 		self.email = email
 		self.passwordHash = passwordHash
 		self.name = name
+		self.bio = bio
 		self.city = city
+		self.stateID = stateID
 		self.joinedAt = joinedAt ?? Date()
 	}
 	
-	convenience init(email: String, password: String, passwordRepeat: String? = nil, name: String, city: String) throws {
+	convenience init(
+		email: String,
+		password: String,
+		passwordRepeat: String? = nil,
+		name: String,
+		bio: String,
+		city: String,
+		state: USState
+	) throws {
 		if let passwordRepeat = passwordRepeat,
 		   password != passwordRepeat
 		{
@@ -31,7 +53,9 @@ final class UserAccount: MySQLModel {
 			email: email,
 			passwordHash: BCrypt.hash(password).convert(),
 			name: name,
-			city: city
+			bio: bio,
+			city: city,
+			stateID: state.rawValue
 		)
 	}
 }
@@ -65,7 +89,9 @@ extension UserAccount {
 		password: String,
 		passwordRepeat: String? = nil,
 		name: String,
+		bio: String,
 		city: String,
+		state: USState,
 		on connection: DatabaseConnectable
 	) -> Future<UserAccount> {
 		do {
@@ -74,8 +100,12 @@ extension UserAccount {
 				password: password,
 				passwordRepeat: passwordRepeat,
 				name: name,
-				city: city
-			).create(on: connection)
+				bio: bio,
+				city: city,
+				state: state
+			).create(on: connection).catchMap { error in
+				throw Abort(.badRequest, reason: "An account with that email already exists. (\(error))")
+			}
 		}
 		catch {
 			return connection.eventLoop.newFailedFuture(error: error)
@@ -91,7 +121,9 @@ struct UserProfile: Content {
 	let id: Int
 	let email: String
 	let name: String
+	let bio: String
 	let city: String
+	let state: USStateContent?
 	let joinedAt: String
 }
 
@@ -102,7 +134,10 @@ extension UserAccount {
 			id: requireID(),
 			email: email,
 			name: name,
+			bio: bio,
 			city: city,
+			state: USState(rawValue: stateID)?.content,
+			// XXX: Trying to JSON-encode dates currently results in a server crash
 			joinedAt: "\(joinedAt.timeIntervalSince1970)"
 		)
 	}

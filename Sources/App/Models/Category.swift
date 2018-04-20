@@ -31,3 +31,9 @@ extension Category {
 		return children(\SampleQuestion.categoryID)
 	}
 }
+
+extension Category {
+	static func getAll(on conn: DatabaseConnectable) throws -> Future<[Category]> {
+		return try query(on: conn).sort(\.id, .ascending).all()
+	}
+}
