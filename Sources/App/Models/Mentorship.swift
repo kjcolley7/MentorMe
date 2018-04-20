@@ -9,7 +9,6 @@ final class Mentorship: MySQLModel {
 	var id: Int?
 	var mentorID: Mentor.ID
 	var menteeID: UserAccount.ID
-	var categoryID: Category.ID
 	var status: Status
 	var startedAt: Date
 	var acceptedAt: Date?
@@ -21,7 +20,6 @@ final class Mentorship: MySQLModel {
 		id: Int? = nil,
 		mentorID: Mentor.ID,
 		menteeID: UserAccount.ID,
-		categoryID: Category.ID,
 		status: Status = .proposed,
 		startedAt: Date? = nil,
 		acceptedAt: Date? = nil,
@@ -32,7 +30,6 @@ final class Mentorship: MySQLModel {
 		self.id = id
 		self.mentorID = mentorID
 		self.menteeID = menteeID
-		self.categoryID = categoryID
 		self.status = status
 		self.startedAt = startedAt ?? Date()
 		self.acceptedAt = acceptedAt ?? Date()
@@ -52,9 +49,6 @@ extension Mentorship: Migration {
 			
 			// Add FOREIGN KEY reference for menteeID
 			try builder.addReference(from: \.menteeID, to: \UserAccount.id, actions: .update)
-			
-			// Add FOREIGN KEY reference for categoryID
-			try builder.addReference(from: \.categoryID, to: \Category.id, actions: .update)
 		}
 	}
 }

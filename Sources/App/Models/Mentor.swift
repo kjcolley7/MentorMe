@@ -54,7 +54,13 @@ extension Mentor: Content { }
 extension Mentor: Parameter { }
 
 extension Mentor {
-	func getUser(on conn: DatabaseConnectable) -> Parent<Mentor, UserAccount> {
+	var user: Parent<Mentor, UserAccount> {
 		return parent(\.userID)
+	}
+	
+	func getProfile(on conn: DatabaseConnectable) throws -> Future<UserProfile> {
+		return try user.get(on: conn).map(to: UserProfile.self) { account in
+			return try account.getProfile()
+		}
 	}
 }

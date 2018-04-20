@@ -28,12 +28,12 @@ final class SearchController: RouteCollection {
 		return Future<SearchRequest>.map(on: req) {
 			try req.query.decode(SearchRequest.self)
 		}.flatMap(to: SearchContext.self) { content in
-			let futureMentors: Future<[UserAccount]>
+			let futureMentors: Future<[UserProfile]>
 			if let categoryID = content.category,
 			   let city = content.city,
 			   let state = content.state
 			{
-				futureMentors = try Category.find(categoryID, on: req).flatMap(to: [UserAccount].self) { category in
+				futureMentors = try Category.find(categoryID, on: req).flatMap(to: [UserProfile].self) { category in
 					guard let category = category else {
 						throw Alert(.danger, message: "Invalid category ID")
 					}
@@ -42,11 +42,11 @@ final class SearchController: RouteCollection {
 						.filter(\Mentor.stateID == state.rawValue)
 						.filter(\Mentor.city == city)
 						.all()
-						.flatMap(to: [UserAccount].self)
+						.flatMap(to: [UserProfile].self)
 					{ mentors in
-						var futureUsers = [Future<UserAccount>]()
+						var futureUsers = [Future<UserProfile>]()
 						for mentor in mentors {
-							try futureUsers.append(mentor.getUser(on: req).get(on: req))
+							try futureUsers.append(mentor.getProfile(on: req))
 						}
 						return futureUsers.flatten(on: req)
 					}
@@ -61,7 +61,7 @@ final class SearchController: RouteCollection {
 					let selectedCity = content.city ?? profile?.city
 					let selectedStateID = content.state ?? profile?.state?.id
 					let selectedCategoryID = content.category
-					return try SearchContext(
+					return SearchContext(
 						user: profile,
 						alert: alert,
 						categories: categories,
@@ -69,7 +69,7 @@ final class SearchController: RouteCollection {
 						selectedCity: selectedCity,
 						selectedStateID: selectedStateID,
 						selectedCategoryID: selectedCategoryID,
-						mentors: mentors.map { try $0.getProfile() }
+						mentors: mentors
 					)
 				}
 			}

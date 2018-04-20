@@ -31,29 +31,31 @@
 		<h3 class="text-center" id="city_label" style="margin-top:30px;"></h3>
 		<div id="cardHolder">
 		#for(mentor in mentors) {
-			<div id="userCard">
-				<div class="container">
-					<div class="row">
-						<div class="col" id="profilePic"><img src="/assets/img/basic.png" style="border-radius:50%;height:100%;"></div>
-						<div class="col" id="name">
-							<p id="namePara">#(mentor.name)</p>
+			<a href="#if(user.id == mentor.id) {/profile} else{/mentor/#(mentor.id)}">
+				<div id="userCard">
+					<div class="container">
+						<div class="row">
+							<div class="col" id="profilePic"><img src="/assets/img/basic.png" style="border-radius:50%;height:100%;"></div>
+							<div class="col" id="name">
+								<p id="namePara">#(mentor.name)</p>
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col">
-							<p id="cardStars">
-								#(ratingHTML)
-								#/*<span id="highlightedStars">★★★★</span><span id="unHighlightedStars">☆</span>*/
-							</p>
+						<div class="row">
+							<div class="col">
+								<p id="cardStars">
+									#(ratingHTML)
+									#/*<span id="highlightedStars">★★★★</span><span id="unHighlightedStars">☆</span>*/
+								</p>
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col">
-							<p><br>#(mentor.bio)<br><br></p>
+						<div class="row">
+							<div class="col">
+								<p><br>#(mentor.bio)<br><br></p>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</a>
 		}
 		</div>
 

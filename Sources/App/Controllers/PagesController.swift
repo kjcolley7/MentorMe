@@ -20,5 +20,13 @@ final class PagesController: RouteCollection {
 		// Profile page: /profile
 		let profileController = ProfileController()
 		try router.register(collection: profileController)
+		
+		// Mentor profile: /mentor/:id
+		let mentorProfileController = MentorProfileController()
+		try router.register(collection: mentorProfileController)
+		
+		// Mentorship and messaging: /mentorship
+		let mentorshipController = MentorshipController()
+		try router.register(collection: mentorshipController)
 	}
 }

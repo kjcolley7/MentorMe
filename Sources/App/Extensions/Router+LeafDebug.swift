@@ -23,6 +23,14 @@ struct EmptyTemplateContext: TemplateContext {
 	}
 }
 
+struct Redirect: Error {
+	let path: String
+	
+	init(to path: String) {
+		self.path = path
+	}
+}
+
 
 extension Router {
 	func getTemplate<T>(
@@ -32,15 +40,28 @@ extension Router {
 	) where T: TemplateContext {
 		// GET /foo -> View
 		let pathComponents = path.makeDynamicPathComponents()
-		on(.GET, at: pathComponents) { req -> Future<View> in
-			return try contextGetter(req, req.profile, nil).flatMap(to: View.self) { context -> Future<View> in
-				return try (req.view() as TemplateRenderer).render(template, context)
+		on(.GET, at: pathComponents) { req -> Future<Response> in
+			return try contextGetter(req, req.profile, nil).flatMap(to: Response.self) { context in
+				return try req.view().render(template, context).encode(for: req)
 			}.catchFlatMap { error in
+				if let redirect = error as? Redirect {
+					return .map(on: req) { req.redirect(to: redirect.path) }
+				}
+				
 				let context = EmptyTemplateContext(
 					user: req.profile,
 					alert: Alert.fromError(error)
 				)
-				return try (req.view() as TemplateRenderer).render(template, context)
+				
+				return try req.view().render(template, context).encode(for: req)
+			}
+			.catchFlatMap { error in
+				let context = EmptyTemplateContext(
+					user: req.profile,
+					alert: Alert.fromError(error)
+				)
+				
+				return try req.view().render("homepage", context).encode(for: req)
 			}
 		}
 		
@@ -49,10 +70,8 @@ extension Router {
 			// GET /foo/json -> JSON
 			let jsonComponents = DynamicPathComponent.constant(PathComponent(string: "json")).makeDynamicPathComponents()
 			on(.GET, at: pathComponents + jsonComponents) { req -> Future<T> in
-				do {
+				return .flatMap(on: req) {
 					return try contextGetter(req, req.profile, nil)
-				} catch {
-					return req.eventLoop.newFailedFuture(error: error)
 				}
 			}
 //		}
