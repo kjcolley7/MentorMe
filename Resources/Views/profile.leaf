@@ -2,7 +2,7 @@
 #set("content") {
 	<div class="profile-card">
 		<div class="profile-back"></div>
-		<img class="rounded-circle profile-pic" src="/assets/img/2.jpg" />
+		<img class="rounded-circle profile-pic" src="$(user.avatarURL)" />
 		<h3 id="nameHeading" class="profile-name">#(user.name)</h3>
 		<i class="fa fa-star-o" id="star_one"></i>
 		<i class="fa fa-star-o" id="star_two"></i>
