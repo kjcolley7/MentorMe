@@ -15,7 +15,7 @@
 					<div class="card-body">
 						<h4 class="card-title" id="namesProfile">#(user.name)'s Profile</h4>
 						<h6 class="text-muted card-subtitle mb-2" id="cityPlaceHolder">
-							<i class="icon ion-ios-location" style="font-size:20px;"></i> #(user.city)
+							<i class="icon ion-ios-location" style="font-size:20px;"></i> #(user.city), #(user.state.abbreviation)
 						</h6>
 						<p class="card-text" id="details">
 							#if(user.bio) {
