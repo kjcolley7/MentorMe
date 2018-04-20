@@ -30,6 +30,8 @@ $("#stars").click(function(e){
             alert("Rating sent");
           }
         })
+
+        window.location.href = "/";
 });
 
 $("#categorySubmit").click(function(e){
