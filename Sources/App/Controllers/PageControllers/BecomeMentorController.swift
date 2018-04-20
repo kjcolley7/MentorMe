@@ -47,14 +47,8 @@ final class BecomeMentorController: RouteCollection {
 			
 			return futures.flatten(on: req).map { _ in
 				return req.redirect(to: "/profile")
-			}.catchFlatMap { error in
-				return try Category.getAll(on: req).flatMap(to: Response.self) { categories in
-					return try req.view().render("becomeMentor", BecomeMentorContext(
-						user: req.profile,
-						alert: Alert.fromError(error),
-						categories: categories
-					)).encode(for: req)
-				}
+			}.catchMap { error in
+				return req.redirect(to: "/profile")
 			}
 		}
 	}
