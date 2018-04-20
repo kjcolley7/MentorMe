@@ -28,14 +28,35 @@ final class MentorshipController: RouteCollection {
 		return .flatMap(on: req) {
 			return try req.content.decode(MentorshipRequest.self).flatMap(to: Response.self) { content in
 				let user = try req.requireAuthenticated(UserAccount.self)
-				let mentorship = try Mentorship(
-					mentorID: content.mentor,
-					menteeID: user.requireID(),
-					categoryID: content.category
-				)
-				
-				return mentorship.create(on: req).map(to: Response.self) { created in
-					return try req.redirect(to: "/mentorship/\(created.requireID())")
+				return try user.getMentorships(on: req, asMentor: false, asMentee: true)
+					.count()
+					.flatMap(to: Response.self)
+				{ menteeshipCount in
+					if menteeshipCount >= 5 {
+						throw Alert(.danger, message: "Cannot be a mentee in more than 5 mentorships at once!")
+					}
+					
+					let mentorship = try Mentorship(
+						mentorID: content.mentor,
+						menteeID: user.requireID(),
+						categoryID: content.category
+					)
+					
+					return mentorship.create(on: req).map(to: Response.self) { created in
+						return try req.redirect(to: "/mentorship/\(created.requireID())")
+					}
+				}.catchFlatMap { error in
+					return try UserAccount.find(content.mentor, on: req).flatMap(to: Response.self) { mentor in
+						return try req.view().render(
+							"/mentor/\(content.mentor)",
+							MentorProfileController.MentorProfileContext(
+								user: user.getProfile(),
+								alert: Alert.fromError(error),
+								mentor: mentor?.getProfile(),
+								selectedCategoryID: content.category
+							)
+						).encode(for: req)
+					}
 				}
 			}
 		}

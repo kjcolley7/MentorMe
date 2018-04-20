@@ -142,10 +142,18 @@ extension UserAccount {
 		)
 	}
 	
-	func getMentorships(on conn: DatabaseConnectable) throws -> QueryBuilder<Mentorship, Mentorship> {
+	func getMentorships(on conn: DatabaseConnectable, asMentor: Bool = true, asMentee: Bool = true) throws -> QueryBuilder<Mentorship, Mentorship> {
+		if !(asMentor || asMentee) {
+			throw Abort(.internalServerError)
+		}
+		
 		return try Mentorship.query(on: conn).group(.or) { or in
-			try or.filter(\Mentorship.mentorID == self.requireID())
-			try or.filter(\Mentorship.menteeID == self.requireID())
+			if asMentor {
+				try or.filter(\Mentorship.mentorID == self.requireID())
+			}
+			if asMentee {
+				try or.filter(\Mentorship.menteeID == self.requireID())
+			}
 		}.sort(\Mentorship.lastActiveAt, .descending)
 	}
 }
