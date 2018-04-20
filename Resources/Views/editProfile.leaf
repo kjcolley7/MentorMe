@@ -7,7 +7,7 @@
 					<div class="avatar">
 						<div class="avatar-bg center"></div>
 					</div>
-					<input type="file" class="form-control" name="avatarFile" />
+					
 				</div>
 			<div class="col-md-8 col-lg-7">
 				<h1>Edit Profile</h1>
