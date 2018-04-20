@@ -5,18 +5,9 @@ RUN apt-get -y install curl
 RUN curl -sL https://apt.vapor.sh | bash
 RUN apt-get -y install swift vapor git mysql-client
 WORKDIR /vapor
-COPY Package.swift Package.resolved ./
-RUN swift package update
-COPY Tests ./Tests
-# WORKDIR /vapor/Sources/Run
-# WORKDIR /vapor/Sources/App
-# WORKDIR /vapor
-# RUN touch Sources/Run/fake.swift Sources/App/fake.swift
-# RUN swift build -c release
-# RUN rm -rf Sources/
-COPY Sources ./Sources
+COPY Package.swift Package.resolved Tests Sources ./
 RUN swift build -c release
-RUN rm -rf Sources Package.resolved Package.swift
+RUN rm -rf Package.swift Package.resolved Tests Sources
 COPY docker-entrypoint.sh ./
 ENV ["SERVER_LISTEN", "SERVER_PORT", "SERVER_MAX_BODY_SIZE"]
 ENV ["MYSQL_HOSTNAME", "MYSQL_USER", "MYSQL_PASSWORD", "MYSQL_DATABASE"]
