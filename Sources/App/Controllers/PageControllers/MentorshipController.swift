@@ -4,16 +4,19 @@ import FluentMySQL
 
 final class MentorshipController: RouteCollection {
 	func boot(router: Router) throws {
-		let authg = router.grouped(RedirectMiddleware<UserAccount>.login(path: "/login"))
+		let chatg = router.grouped(RedirectMiddleware<UserAccount>.login(path: "/login")).grouped("mentorship")
 		
 		// GET /mentorship
-		authg.getTemplate("mentorship", template: "messaging", contextGetter: mentorshipIndex)
+		chatg.getTemplate(template: "messaging", contextGetter: mentorshipIndex)
 		
 		// POST /mentorship
-		authg.post("mentorship", use: newMentorship)
+		chatg.post(use: newMentorship)
 		
 		// GET /mentorship/:id
-		authg.getTemplate("mentorship", Mentorship.parameter, template: "messaging", contextGetter: mentorshipPage)
+		chatg.getTemplate(Mentorship.parameter, template: "messaging", contextGetter: mentorshipPage)
+		
+		// POST /mentorship/:id/sendMessage
+		chatg.post(Mentorship.parameter, "sendMessage", use: sendMessage)
 	}
 	
 	struct MentorshipRequest: Decodable {
@@ -38,12 +41,19 @@ final class MentorshipController: RouteCollection {
 		}
 	}
 	
+	struct MessageContent: Content {
+		let id: Int
+		let body: String
+		let sentAt: Date
+		let fromYou: Bool
+	}
+	
 	struct MentorshipContext: TemplateContext {
 		let user: UserProfile?
 		let alert: Alert?
 		let mentorships: [Mentorship]?
 		let mentorship: Mentorship?
-		let messages: [Message]?
+		let messages: [MessageContent]?
 		let sampleQuestions: [SampleQuestion]?
 	}
 	
@@ -70,13 +80,21 @@ final class MentorshipController: RouteCollection {
 						futureQuestions = SampleQuestion.query(on: req).all()
 					}
 					
-					return futureQuestions.map { sampleQuestions in
-						return MentorshipContext(
+					return futureQuestions.map(to: MentorshipContext.self) { sampleQuestions in
+						return try MentorshipContext(
 							user: profile,
 							alert: alert,
 							mentorships: mentorships,
 							mentorship: mentorships.first,
-							messages: messages,
+							messages: messages.map { message in
+								let userIsMentor = try user.requireID() == mentorships.first?.id
+								return try MessageContent(
+									id: message.requireID(),
+									body: message.body,
+									sentAt: message.sentAt,
+									fromYou: message.fromMentor == userIsMentor
+								)
+							},
 							sampleQuestions: sampleQuestions
 						)
 					}
@@ -113,16 +131,41 @@ final class MentorshipController: RouteCollection {
 							futureQuestions = SampleQuestion.query(on: req).all()
 						}
 						
-						return futureQuestions.map { sampleQuestions in
-							return MentorshipContext(
+						return futureQuestions.map(to: MentorshipContext.self) { sampleQuestions in
+							return try MentorshipContext(
 								user: profile,
 								alert: alert,
 								mentorships: mentorships,
 								mentorship: mentorship,
-								messages: messages,
+								messages: messages.map { message in
+									let userIsMentor = try user.requireID() == mentorships.first?.id
+									return try MessageContent(
+										id: message.requireID(),
+										body: message.body,
+										sentAt: message.sentAt,
+										fromYou: message.fromMentor == userIsMentor
+									)
+								},
 								sampleQuestions: sampleQuestions
 							)
 						}
+					}
+				}
+			}
+		}
+	}
+	
+	struct MessageRequest: Decodable {
+		let body: String
+	}
+	
+	func sendMessage(_ req: Request) -> Future<Response> {
+		return .flatMap(on: req) {
+			let user = try req.requireAuthenticated(UserAccount.self)
+			return try req.parameter(Mentorship.self).flatMap(to: Response.self) { mentorship in
+				return try req.content.decode(MessageRequest.self).flatMap(to: Response.self) { content in
+					return mentorship.sendMessage(on: req, as: user, body: content.body).map(to: Response.self) { message in
+						return try req.redirect(to: "/mentorship/\(mentorship.requireID())")
 					}
 				}
 			}

@@ -33,9 +33,9 @@
 			}
 			</div>
 			<div class="form-row">
-				<form method="post" action="sendMessage">
+				<form method="post" action="/mentorship/#(mentorship.id)/sendMessage">
 					<div class="col-md-11">
-						<textarea name="message" class="text-input" placeholder="Enter message here" style="margin-top:40px;" maxlength="140" id="textArea"></textarea>
+						<textarea name="body" class="text-input" placeholder="Enter message here" style="margin-top:40px;" maxlength="140" id="textArea"></textarea>
 					</div>
 					<div class="col-md-1">
 						<button class="btn btn-success" type="submit" style="margin-top:55px;">Send</button>
