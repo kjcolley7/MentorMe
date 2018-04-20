@@ -29,7 +29,7 @@ final class AuthController: RouteCollection {
 	struct RegisterContext: TemplateContext {
 		let user: UserProfile?
 		let alert: Alert?
-		let states: [USStateContent]
+		let states: [USStateContent]?
 	}
 	
 	func registerPage(_ req: Request, profile: UserProfile? = nil, alert: Alert? = nil) throws -> Future<RegisterContext> {

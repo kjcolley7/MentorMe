@@ -13,7 +13,7 @@
 				#if(user) {
 					<li id="profileNav" class="nav-item" role="presentation"><a class="nav-link" href="/profile">Profile</a></li>
 					<li id="becomeMentorNav" class="nav-item" role="presentation"><a class="nav-link" href="/becomeMentor">Become a Mentor</a></li>
-					<li id="messagingNav" class="nav-item" role="presentation"><a class="nav-link" href="/messaging">Messaging</a></li>
+					<li id="messagingNav" class="nav-item" role="presentation"><a class="nav-link" href="/mentorship">Messaging</a></li>
 				}
 			</ul>
 			<span class="navbar-text actions">

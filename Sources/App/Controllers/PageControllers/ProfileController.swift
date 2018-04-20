@@ -19,7 +19,7 @@ final class ProfileController: RouteCollection {
 	struct EditProfileContext: TemplateContext {
 		let user: UserProfile?
 		let alert: Alert?
-		let states: [USStateContent]
+		let states: [USStateContent]?
 	}
 	
 	func editProfilePage(_ req: Request, profile: UserProfile? = nil, alert: Alert? = nil) -> Future<EditProfileContext> {

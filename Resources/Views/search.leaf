@@ -31,7 +31,7 @@
 		<h3 class="text-center" id="city_label" style="margin-top:30px;"></h3>
 		<div id="cardHolder">
 		#for(mentor in mentors) {
-			<a href="#if(user.id == mentor.id) {/profile} else{/mentor/#(mentor.id)}">
+			<a href="#if(user.id == mentor.id) {/profile} else{/mentor/#(mentor.id)?category=#(selectedCategoryID)}">
 				<div id="userCard">
 					<div class="container">
 						<div class="row">
@@ -43,8 +43,8 @@
 						<div class="row">
 							<div class="col">
 								<p id="cardStars">
-									#(ratingHTML)
-									#/*<span id="highlightedStars">★★★★</span><span id="unHighlightedStars">☆</span>*/
+									#//(ratingHTML)
+									<span id="highlightedStars">★★★★</span><span id="unHighlightedStars">☆</span>
 								</p>
 							</div>
 						</div>
@@ -58,7 +58,6 @@
 			</a>
 		}
 		</div>
-
 	</div>
 }
 #embed("base")

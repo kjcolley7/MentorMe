@@ -141,4 +141,11 @@ extension UserAccount {
 			joinedAt: "\(joinedAt.timeIntervalSince1970)"
 		)
 	}
+	
+	func getMentorships(on conn: DatabaseConnectable) throws -> QueryBuilder<Mentorship, Mentorship> {
+		return try Mentorship.query(on: conn).group(.or) { or in
+			try or.filter(\Mentorship.mentorID == self.requireID())
+			try or.filter(\Mentorship.menteeID == self.requireID())
+		}.sort(\Mentorship.lastActiveAt, .descending)
+	}
 }

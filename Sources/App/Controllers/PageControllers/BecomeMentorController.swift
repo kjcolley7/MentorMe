@@ -15,7 +15,7 @@ final class BecomeMentorController: RouteCollection {
 	struct BecomeMentorContext: TemplateContext {
 		let user: UserProfile?
 		let alert: Alert?
-		let categories: [Category]
+		let categories: [Category]?
 	}
 	
 	func becomeMentorPage(_ req: Request, profile: UserProfile? = nil, alert: Alert? = nil) throws -> Future<BecomeMentorContext> {

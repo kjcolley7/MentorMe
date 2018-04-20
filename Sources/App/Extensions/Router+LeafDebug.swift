@@ -53,15 +53,14 @@ extension Router {
 					alert: Alert.fromError(error)
 				)
 				
-				return try req.view().render(template, context).encode(for: req)
-			}
-			.catchFlatMap { error in
-				let context = EmptyTemplateContext(
-					user: req.profile,
-					alert: Alert.fromError(error)
-				)
-				
-				return try req.view().render("homepage", context).encode(for: req)
+				return try req.view().render(template, context).encode(for: req).catchFlatMap { error2 in
+					let context = EmptyTemplateContext(
+						user: req.profile,
+						alert: Alert.fromError(error)
+					)
+					
+					return try req.view().render("homepage", context).encode(for: req)
+				}
 			}
 		}
 		

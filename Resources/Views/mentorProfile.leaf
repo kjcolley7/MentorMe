@@ -29,6 +29,7 @@
 		<div class="col-md-4">
 			<form method="post" action="/mentorship">
 				<input name="mentor" type="hidden" value="#(mentor.id)"/>
+				<input name="category" type="hidden" value="#(selectedCategoryID)"/>
 				<button class="btn" role="button" type="submit" id="go3">CONTACT</button>
 			</form>
 		</div>

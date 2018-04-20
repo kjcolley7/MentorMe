@@ -5,10 +5,10 @@
 			<div class="card">
 				<div class="card-header profile-list" style="height:600px;">
 					<ul class="nav nav-tabs">
-					#for(mentorship in mentorships) {
+					#for(item in mentorships) {
 						<li class="nav-item">
-							<a class="nav-link">
-								<img class="rounded-circle img-fluid" src="#(mentorship.other.avatarURL)" width="80"/>
+							<a class="nav-link" href="/mentorship/#(item.id)">
+								<img class="rounded-circle img-fluid" src="#(item.other.avatarURL)" width="80"/>
 							</a>
 						</li>
 					}

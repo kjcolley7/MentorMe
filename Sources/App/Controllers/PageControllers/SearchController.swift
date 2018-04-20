@@ -16,12 +16,12 @@ final class SearchController: RouteCollection {
 	struct SearchContext: TemplateContext {
 		let user: UserProfile?
 		let alert: Alert?
-		let categories: [Category]
-		let states: [USStateContent]
+		let categories: [Category]?
+		let states: [USStateContent]?
 		let selectedCity: String?
 		let selectedStateID: USState?
 		let selectedCategoryID: Category.ID?
-		let mentors: [UserProfile]
+		let mentors: [UserProfile]?
 	}
 	
 	func searchPage(_ req: Request, profile: UserProfile? = nil, alert: Alert? = nil) throws -> Future<SearchContext> {

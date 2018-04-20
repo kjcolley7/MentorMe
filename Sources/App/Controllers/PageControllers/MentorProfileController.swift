@@ -7,26 +7,34 @@ final class MentorProfileController: RouteCollection {
 		let authg = router.grouped(RedirectMiddleware<UserAccount>.login(path: "/login"))
 		
 		// GET /mentor/:id
-		authg.getTemplate("mentor", Mentor.parameter, template: "mentorProfile", contextGetter: mentorPage)
+		authg.getTemplate("mentor", UserAccount.parameter, template: "mentorProfile", contextGetter: mentorPage)
 	}
 	
 	struct MentorProfileContext: TemplateContext {
 		let user: UserProfile?
 		let alert: Alert?
-		let mentor: UserProfile
+		let mentor: UserProfile?
+		let selectedCategoryID: Int?
 	}
 	
-	func mentorPage(_ req: Request, profile: UserProfile? = nil, alert: Alert? = nil) throws -> Future<MentorProfileContext> {
-		return try req.parameter(Mentor.self).flatMap(to: MentorProfileContext.self) { mentor in
-			if mentor.id == profile?.id {
-				throw Redirect(to: "/profile")
-			}
-			
-			return try mentor.getProfile(on: req).map(to: MentorProfileContext.self) { mentorProfile in
-				return MentorProfileContext(
+	struct MentorProfileRequest: Decodable {
+		let category: Int?
+	}
+	
+	func mentorPage(_ req: Request, profile: UserProfile? = nil, alert: Alert? = nil) -> Future<MentorProfileContext> {
+		return .flatMap(on: req) {
+			return try req.parameter(UserAccount.self).map(to: MentorProfileContext.self) { mentor in
+				if mentor.id == profile?.id {
+					throw Redirect(to: "/profile")
+				}
+				
+				let content = try req.query.decode(MentorProfileRequest.self)
+				
+				return try MentorProfileContext(
 					user: profile,
 					alert: alert,
-					mentor: mentorProfile
+					mentor: mentor.getProfile(),
+					selectedCategoryID: content.category
 				)
 			}
 		}
