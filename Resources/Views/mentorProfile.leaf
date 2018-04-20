@@ -27,7 +27,10 @@
 	</div>
 	<div class="row">
 		<div class="col-md-4">
-			<a href="/messaging" class="btn" role="button" type="link" id="go3">CONTACT</a>
+			<form method="post" action="/mentorship">
+				<input name=“mentor” type=“hidden” value=“#(mentor.id)”/>
+				<button class="btn" role="button" type="submit" id="go3">CONTACT</button>
+			</form>
 		</div>
 	</div>
 }
