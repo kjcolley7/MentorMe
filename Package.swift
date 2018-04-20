@@ -17,10 +17,7 @@ let package = Package(
 		.package(url: "https://github.com/vapor/auth.git", .exact("2.0.0-rc.3.1")),
 		
 		// ⚡️Non-blocking, event-driven Redis client.
-		.package(url: "https://github.com/vapor/redis.git", .exact("3.0.0-rc.2.3")),
-		
-		// 🚍 High-performance trie-node router.
-		.package(url: "https://github.com/vapor/routing.git", .exact("3.0.0-rc.2"))
+		.package(url: "https://github.com/vapor/redis.git", .exact("3.0.0-rc.2.3"))
 	],
 	targets: [
 		.target(name: "App", dependencies: [
