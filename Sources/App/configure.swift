@@ -120,6 +120,9 @@ public func configure(
 	migrations.add(model: SampleQuestion.self, database: .mysql)
 	migrations.add(migration: PopulateSampleQuestions.self, database: .mysql)
 	migrations.add(model: UserAccount.self, database: .mysql)
+	migrations.add(model: Mentor.self, database: .mysql)
+	migrations.add(model: Mentorship.self, database: .mysql)
+	migrations.add(model: Message.self, database: .mysql)
 	services.register(migrations)
 }
 

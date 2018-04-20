@@ -4,48 +4,53 @@
 		<div class="col-md-8 col-lg-2">
 			<div class="card">
 				<div class="card-header profile-list" style="height:600px;">
-                   <ul class="nav nav-tabs">
-                   	#for(mentorship in mentorships) {
-                        	<li class="nav-item"><a class="nav-link"><img class="rounded-circle img-fluid" src="#(mentorship.other.avatarURL)" width="80"></a></li>
-                   	}
-                    </ul>
+					<ul class="nav nav-tabs">
+					#for(mentorship in mentorships) {
+						<li class="nav-item">
+							<a class="nav-link">
+								<img class="rounded-circle img-fluid" src="#(mentorship.other.avatarURL)" width="80"/>
+							</a>
+						</li>
+					}
+					</ul>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-4 col-lg-9 offset-lg-0">
 			<div class="card">
-				<div class="card-header"><img class="rounded-circle flex-column" src="#(mentorship.other.avatarURL)" width="80px">
-					<h1 class="text-dark d-inline d-inline-flex" style="padding:0px;padding-right:0px;padding-left:80px;padding-top:0px;padding-bottom:0px;">User</h1>
+				<div class="card-header">
+					<img class="rounded-circle flex-column" src="#(mentorship.other.avatarURL)" width="80px"/>
+					<h1 class="text-dark d-inline d-inline-flex" style="padding: 0px 0px 0px 80px;">User</h1>
 					<button id="endMentorshipButton" class="btn btn-primary" type="button" data-toggle="modal" data-target="#reviewModal">End mentorship</button>
 				</div>
 			</div>
 			<div class="d-flex flex-column chat" id="chat">
-				#for(message in conversation) {
-					<div class="bubble #if(message.fromYou) {me} else {you}" style="margin-top:15px">
+			#for(message in messages) {
+				<div class="bubble #if(message.fromYou) {me} else {you}" style="margin-top:15px">
 					<p>#(message.body)</p>
-					<p class=message-timestamp>Sent: #(message.time)</p>
+					<p class="message-timestamp">Sent: #(message.sentAt)</p>
 				</div>
-				}
-				</div>
+			}
+			</div>
 			<div class="form-row">
-					<form method="post" action="sendMessage">
-						<div class="col-md-11">
-							<textarea name="message" class="text-input" placeholder="Enter message here" style="margin-top:40px;" maxlength="140" id="textArea"></textarea>
-						</div>
-						<div class="col-md-1">
-							<button class="btn btn-success" type="submit" style="margin-top:55px;">Send</button>
-						</div>
-					</form>
+				<form method="post" action="sendMessage">
+					<div class="col-md-11">
+						<textarea name="message" class="text-input" placeholder="Enter message here" style="margin-top:40px;" maxlength="140" id="textArea"></textarea>
+					</div>
+					<div class="col-md-1">
+						<button class="btn btn-success" type="submit" style="margin-top:55px;">Send</button>
+					</div>
+				</form>
 			</div>
 			<div class="row">
-    			<div class="col" style="margin-top:30px;">
-						<h1 class="text-dark d-inline d-inline-flex" style="padding:0px;padding-right:0px;padding-left:20px;padding-top:0px;padding-bottom:0px;">Sample Questions</h1>
-        			<ul class="sample-questions">
-        			#for(question in sampleQuestions) {
-        				<li>#(question)</li>
-        			}
-        			</ul>
-    			</div>
+				<div class="col" style="margin-top:30px;">
+					<h1 class="text-dark d-inline d-inline-flex" style="padding: 0px 0px 0px 20px;">Sample Questions</h1>
+					<ul class="sample-questions">
+					#for(question in sampleQuestions) {
+						<li>#(question)</li>
+					}
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>

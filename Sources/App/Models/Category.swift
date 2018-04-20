@@ -30,6 +30,10 @@ extension Category {
 	func sampleQuestions() -> Children<Category, SampleQuestion> {
 		return children(\SampleQuestion.categoryID)
 	}
+	
+	func mentors() -> Children<Category, Mentor> {
+		return children(\Mentor.categoryID)
+	}
 }
 
 extension Category {
