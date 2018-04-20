@@ -50,6 +50,17 @@
   padding:16px 32px;
 }
 
+#go5 {
+  outline:auto;
+  font-weight:bold;
+  font-size:16px;
+  letter-spacing:0.4px;
+  line-height:1;
+  padding:16px 32px;
+  margin-left:8px;
+  margin-top:40px;
+}
+
 #submit:active {
   background-color:#5cb85c;
 }
