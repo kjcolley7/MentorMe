@@ -5,7 +5,7 @@ RUN apt-get -y install curl
 RUN curl -sL https://apt.vapor.sh | bash
 RUN apt-get -y install swift vapor git mysql-client
 WORKDIR /vapor
-COPY Package.swift ./
+COPY Package.swift Package.resolved ./
 RUN swift package update
 COPY Tests ./Tests
 # WORKDIR /vapor/Sources/Run
