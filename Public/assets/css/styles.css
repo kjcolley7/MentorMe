@@ -8,7 +8,7 @@
 }
 
 #drop {
-  margin-left:50px;
+  margin-left:20px;
 }
 
 #go {
@@ -42,4 +42,9 @@
 
 #textArea{
   height:70px;
+}
+
+#statesCss{
+  width:50px;
+  margin-left: 25px;
 }
