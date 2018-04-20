@@ -108,7 +108,7 @@ final class MentorshipController: RouteCollection {
 							mentorships: mentorships,
 							mentorship: mentorships.first,
 							messages: messages.map { message in
-								let userIsMentor = try user.requireID() == mentorships.first?.id
+								let userIsMentor = try user.requireID() == mentorships.first?.mentorID
 								return try MessageContent(
 									id: message.requireID(),
 									body: message.body,
@@ -159,7 +159,7 @@ final class MentorshipController: RouteCollection {
 								mentorships: mentorships,
 								mentorship: mentorship,
 								messages: messages.map { message in
-									let userIsMentor = try user.requireID() == mentorships.first?.id
+									let userIsMentor = try user.requireID() == mentorship.mentorID
 									return try MessageContent(
 										id: message.requireID(),
 										body: message.body,
