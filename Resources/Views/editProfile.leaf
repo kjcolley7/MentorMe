@@ -14,6 +14,7 @@
 				<hr />
 				<div class="form-row">
 					<div class="col">
+            <div>Name</div>
 						<div class="form-group">
 							<input id="nameEdit" type="text" class="form-control" name="name" placeholder="Name" value="#(user.name)"/>
 						</div>
@@ -21,27 +22,31 @@
 				</div>
 				<div class="form-row">
 					<div class="col">
+            <div>Bio</div>
 						<div class="form-group">
-							<textarea id="bioEdit" type="text" class="form-control" name="bio" placeholder="Bio">#(user.bio)</textarea>
+							<textarea id="bioEdit" type="text" class="form-control" name="bio" placeholder="">#(user.bio)</textarea>
 						</div>
 					</div>
 				</div>
 				<div class="form-row">
 					<div class="col">
+            <div>Email</div>
 						<div class="form-group">
-							<input id="emailEdit" type="email" class="form-control" name="email" placeholder="Email" value="#(user.email)"/>
+							<input id="emailEdit" type="email" class="form-control" name="email" placeholder="" value="#(user.email)"/>
 						</div>
 					</div>
 				</div>
 				<div class="form-row">
 					<div class="col">
+            <div>City</div>
 						<div class="form-group">
-							<input id="cityEdit" type="text" class="form-control" name="city" placeholder="City" value="#(user.city)"/>
+							<input id="cityEdit" type="text" class="form-control" name="city" placeholder="" value="#(user.city)"/>
 						</div>
 					</div>
 				</div>
 				<div class="form-row">
 					<div class="col">
+            <div>State</div>
 						<div class="form-group">
 							<select name="state" class="form-control">
 							#for(state in states) {
@@ -53,13 +58,15 @@
 				</div>
 				<div class="form-row">
 					<div class="col-sm-12 col-md-6">
+            <div>Password</div>
 						<div class="form-group">
-							<input id="passwordEdit" type="password" class="form-control" name="password" placeholder="Password" />
+							<input id="passwordEdit" type="password" class="form-control" name="password" placeholder="" />
 						</div>
 					</div>
 					<div class="col-sm-12 col-md-6">
+            <div>Confirm Password</div>
 						<div class="form-group">
-							<input id="confirmpasswordEdit" type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" />
+							<input id="confirmpasswordEdit" type="password" class="form-control" name="confirmPassword" placeholder="" />
 						</div>
 					</div>
 				</div>
