@@ -139,34 +139,12 @@
 #cardStars {
 }
 
-#profilePic {
-  text-align:center;
-  height:100px;
-  padding:10px;
-}
-
-#name {
-  margin:auto;
-  text-align:center;
-}
-
-#namePara {
-  margin:auto;
-}
-
-#cardHolder {
-  text-align:center;
-  margin:auto;
-  width:80%;
-  padding:50px;
-  background-color:#989898;
-  border-radius:10%;
-  max-width:750px;
-}
-
-#userCard {
-  background-color:#1d1e28;
-  border-radius:5%;
-  margin-bottom:30px;
-}
-
+/*.pointer {
+  border:solid;
+  border-width:10px;
+  opacity:0;
+  border-right-color:#fff;
+  position:absolute;
+  margin-left:-85px;
+  margin-top:-20px;
+}*/
