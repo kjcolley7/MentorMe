@@ -38,8 +38,8 @@
 			<div class="d-flex flex-column chat" id="chat">
 			#for(message in messages) {
 				<div class="bubble #if(message.fromYou) {me} else {you}" style="margin-top:15px">
-					<p>#(message.body)</p>
-					<p class="message-timestamp">Sent: #(message.sentAt)</p>
+					<p>#multiline(message.body)</p>
+					<p class="message-timestamp">Sent: #date(message.sentAt, "yyyy-MM-dd HH:mm:ss")</p>
 				</div>
 			}
 			</div>
