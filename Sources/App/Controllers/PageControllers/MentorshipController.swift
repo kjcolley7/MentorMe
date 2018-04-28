@@ -80,35 +80,68 @@ final class MentorshipController: RouteCollection {
 	
 	func mentorshipIndex(_ req: Request, profile: UserProfile? = nil, alert: Alert? = nil) -> Future<MentorshipContext> {
 		return .flatMap(on: req) {
-			let user = try req.requireAuthenticated(UserAccount.self)
-			return try user.getMentorships(on: req).all().flatMap(to: MentorshipContext.self) { mentorships in
-				let futureMessages: Future<[Message]>
-				if let mentorship = mentorships.first {
-					futureMessages = try mentorship.messages.query(on: req).sort(\Message.sentAt, .ascending).all()
-				}
-				else {
-					futureMessages = .map(on: req) { [] }
+			return try self.getMessages(on: req, as: req.requireAuthenticated(UserAccount.self), alert: alert)
+		}
+	}
+	
+	func mentorshipPage(_ req: Request, profile: UserProfile? = nil, alert: Alert? = nil) -> Future<MentorshipContext> {
+		return .flatMap(on: req) {
+			return try req.parameter(Mentorship.self).flatMap(to: MentorshipContext.self) { mentorship in
+				let user = try req.requireAuthenticated(UserAccount.self)
+				let userID = try user.requireID()
+				guard mentorship.mentorID == userID || mentorship.menteeID == userID else {
+					throw Abort(.notFound, reason: "Could not find requested mentorship!")
 				}
 				
-				return futureMessages.flatMap(to: MentorshipContext.self) { messages in
-					let futureQuestions: Future<[SampleQuestion]>
-					if let category = mentorships.first?.categoryID {
-						futureQuestions = try SampleQuestion.query(on: req)
-							.filter(\SampleQuestion.categoryID == category)
-							.all()
+				return self.getMessages(on: req, as: user, from: mentorship)
+			}
+		}
+	}
+	
+	func getMessages(
+		on conn: DatabaseConnectable,
+		as user: UserAccount,
+		from mentorship: Mentorship? = nil,
+		alert: Alert? = nil
+	) -> Future<MentorshipContext> {
+		return .flatMap(on: conn) {
+			return try user.getMentorships(on: conn).all().flatMap(to: MentorshipContext.self) { mentorships in
+				let futureQuestions: Future<[SampleQuestion]>
+				if let category = mentorships.first?.categoryID {
+					futureQuestions = try SampleQuestion.query(on: conn)
+						.filter(\SampleQuestion.categoryID == category)
+						.all()
+				}
+				else {
+					futureQuestions = SampleQuestion.query(on: conn).all()
+				}
+				
+				guard let conversation = mentorship ?? mentorships.first else {
+					return futureQuestions.map { sampleQuestions in
+						return MentorshipContext(
+							user: try? user.getProfile(),
+							alert: alert,
+							mentorships: [],
+							mentorship: nil,
+							messages: [],
+							sampleQuestions: sampleQuestions
+						)
 					}
-					else {
-						futureQuestions = SampleQuestion.query(on: req).all()
-					}
-					
-					return futureQuestions.map(to: MentorshipContext.self) { sampleQuestions in
+				}
+				
+				return futureQuestions.flatMap(to: MentorshipContext.self) { sampleQuestions in
+					return try conversation.messages.query(on: conn)
+						.sort(\Message.sentAt, .ascending)
+						.all()
+						.map(to: MentorshipContext.self)
+					{ messages in
 						return try MentorshipContext(
-							user: profile,
+							user: try? user.getProfile(),
 							alert: alert,
 							mentorships: mentorships,
-							mentorship: mentorships.first,
+							mentorship: conversation,
 							messages: messages.map { message in
-								let userIsMentor = try user.requireID() == mentorships.first?.mentorID
+								let userIsMentor = try user.requireID() == conversation.mentorID
 								return try MessageContent(
 									id: message.requireID(),
 									body: message.body,
@@ -118,58 +151,6 @@ final class MentorshipController: RouteCollection {
 							},
 							sampleQuestions: sampleQuestions
 						)
-					}
-				}
-			}
-		}
-	}
-	
-	func mentorshipPage(_ req: Request, profile: UserProfile? = nil, alert: Alert? = nil) -> Future<MentorshipContext> {
-		return .flatMap(on: req) {
-			return try req.parameter(Mentorship.self).flatMap(to: MentorshipContext.self) { mentorship in
-				let user = try req.requireAuthenticated(UserAccount.self)
-				guard let userID = user.id else {
-					throw Abort(.unauthorized, reason: "User is not authenticated")
-				}
-				
-				guard mentorship.mentorID == userID || mentorship.menteeID == userID else {
-					throw Abort(.notFound, reason: "Could not find requested mentorship!")
-				}
-				
-				return try user.getMentorships(on: req).all().flatMap(to: MentorshipContext.self) { mentorships in
-					return try mentorship.messages.query(on: req)
-						.sort(\Message.sentAt, .ascending)
-						.all()
-						.flatMap(to: MentorshipContext.self)
-					{ messages in
-						let futureQuestions: Future<[SampleQuestion]>
-						if let category = mentorships.first?.categoryID {
-							futureQuestions = try SampleQuestion.query(on: req)
-								.filter(\SampleQuestion.categoryID == category)
-								.all()
-						}
-						else {
-							futureQuestions = SampleQuestion.query(on: req).all()
-						}
-						
-						return futureQuestions.map(to: MentorshipContext.self) { sampleQuestions in
-							return try MentorshipContext(
-								user: profile,
-								alert: alert,
-								mentorships: mentorships,
-								mentorship: mentorship,
-								messages: messages.map { message in
-									let userIsMentor = try user.requireID() == mentorship.mentorID
-									return try MessageContent(
-										id: message.requireID(),
-										body: message.body,
-										sentAt: message.sentAt,
-										fromYou: message.fromMentor == userIsMentor
-									)
-								},
-								sampleQuestions: sampleQuestions
-							)
-						}
 					}
 				}
 			}

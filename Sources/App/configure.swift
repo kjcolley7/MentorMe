@@ -28,6 +28,11 @@ public func configure(
 	// Prefer using Leaf as our template renderer
 	config.prefer(LeafRenderer.self, for: TemplateRenderer.self)
 	
+	// Add custom Leaf tags
+	var leafConfig = LeafTagConfig.default()
+	leafConfig.use(LineBreakTag(), as: "multiline")
+	services.register(leafConfig)
+	
 	// Get server port with default of 8080
 	let port: Int
 	if let envPort = Environment.get("SERVER_PORT") {
